@@ -1,0 +1,131 @@
+<section class="content-header">
+    <h1>
+        车商管理
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="/cardealer/list">车商列表</a></li>
+        <li class="active">添加修改车商</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">添加修改车商</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="carDealerId" value="$!carDealer.carDealerId">
+                            <label class="col-sm-2 control-label">企业名称</label>
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="companyName" value="$!carDealer.companyName">
+                            </div>
+                        </div>
+                        <div class="form-group" id="region">
+                            <label class="col-sm-2 control-label">地区</label>
+
+                            <div class="col-sm-3">
+                                <select class="form-control province" id="provinceId" data-value="$!carDealer.provinceId">
+
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="form-control city" id="cityId" data-value="$!carDealer.cityId">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系人</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="name" value="$!carDealer.name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系电话</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="phone" value="$!carDealer.phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">地址</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="address" value="$!carDealer.address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">主营业务</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="business" value="$!carDealer.business">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">注册时间</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="registTime" value="$!date.format('yyyy-MM-dd',$!carDealer.registTime)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">到期时间</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="expireTime" value="$!date.format('yyyy-MM-dd',$!carDealer.expireTime)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">短信数量</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="smsNum" value="$!carDealer.smsNum">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">短信APPID</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="appId" value="$!carDealer.appId">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">短信APPKEY</label>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="appKey" value="$!carDealer.appKey">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary pull-right" id="save">保存</button>
+                        <button type="button" class="btn btn-default pull-right" id="cancel" style="margin-right: 5px;">取消</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+#set($cssUrls=[
+    "/plugins/datepicker/datepicker3.css"
+])
+#set($jsUrls=[
+    "/plugins/datepicker/bootstrap-datepicker.js",
+    "/plugins/datepicker/bootstrap-datepicker.zh-CN.js",
+    "/plugins/cxselect/cityData.json",
+    "/plugins/cxselect/jquery.cxselect.js",
+    "/js/custom/cardealer/edit.js"
+])

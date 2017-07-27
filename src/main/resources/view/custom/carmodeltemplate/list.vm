@@ -1,0 +1,68 @@
+<section class="content-header">
+    <h1>
+        $!modelsName
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="/carmodel/list">车型管理</a></li>
+        <li class="active">车型模板管理</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">车型模板管理</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form class="form-horizontal">
+                        <div class="row form-group">
+                            <div class="col-xs-3">
+                                <div class="input-group">
+                                    <input type="hidden" id="carModelId" value="$!carModelId" />
+                                    <span class="input-group-addon">标题</span>
+                                    <input type="text" class="form-control" id="title">
+                                </div>
+                            </div>
+
+                            <div class="col-xs-3">
+                                <div class="btn-group">
+                                    <span><button type="button" class="btn btn-info" id="search">搜索</button></span>
+                                    <span><a href="/cartemplate/edit/0?modelid=$!carModelId" class="btn btn-info">新增</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table table-bordered" id="table"
+                           data-pagination="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-showColumns="true">
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<script type="text/javascript">
+    var carModelId = "$!carModelId";
+</script>
+#set($cssUrls=[
+    "/plugins/bootstrap-table/bootstrap-table.min.css",
+    "/plugins/datepicker/datepicker3.css"
+])
+#set($jsUrls=[
+    "/plugins/bootstrap-table/bootstrap-table.js",
+    "/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js",
+    "/plugins/datepicker/bootstrap-datepicker.js",
+    "/plugins/datepicker/bootstrap-datepicker.zh-CN.js",
+    "/js/custom/carmodeltemplate/list.js"
+])

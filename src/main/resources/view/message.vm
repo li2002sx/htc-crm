@@ -1,0 +1,69 @@
+#set($layout = "layout/empty.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <!-- jQuery 2.2.3 -->
+    <script src="/js/util/jquery-2.2.3.min.js?v=${timestamp}"></script>
+    <!-- sockjs -->
+    <script src="/plugins/websocket/sockjs.js?v=${timestamp}"></script>
+    <!-- stomp -->
+    <script src="/plugins/websocket/stomp.js?v=${timestamp}"></script>
+</head>
+<body onload="disconnect()">
+
+<div>
+    <button id="connect" onclick="connect()">连接</button>
+    <button id="disconnect" disabled="disabled" onclick="disconnect()">断开连接</button>
+
+</div>
+
+<div id="conversationDiv">
+    <label>输入你的名字</label>
+    <input type="text" id="name"/>
+    <button id="sendName" onclick="sendName()">发送</button>
+    <p id="response"></p>
+</div>
+<script>
+    var stompClient = null;
+    function  setConnected(connected) {
+        document.getElementById("connect").disabled = connected;
+        document.getElementById('disconnect').disabled = !connected;
+        document.getElementById('conversationDiv').style.visibility = connected ? 'visible' : 'hidden';
+        $('#response').html();
+    }
+
+    function  connect() {
+        var socket = new SockJS('/endpointWisely');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({},function (frame) {
+            setConnected(true);
+            console.log('connected'+ frame);
+            stompClient.subscribe('/topic/getResponse',function (response) {
+                showResponse(JSON.parse(response.body).responseMessage);
+            });
+        });
+    }
+
+    function disconnect() {
+        if(stompClient!=null){
+            stompClient.disconnect();
+        }
+        setConnected(false);
+        console.log('disconnected')
+    }
+
+
+    function  sendName() {
+        var name = $('#name').val();
+        stompClient.send('/say',{},JSON.stringify({'name':name}));
+    }
+    function  showResponse(message) {
+        var response = $('#response');
+        response.html(message);
+    }
+
+</script>
+</body>
+<script>

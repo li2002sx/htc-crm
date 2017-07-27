@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.htche.crm.mapper.CarModelTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.htche.crm.domain.CarModelTemplate" >
+    <id column="template_id" property="templateId" jdbcType="INTEGER" />
+    <result column="car_model_id" property="carModelId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="bg_pic_url" property="bgPicUrl" jdbcType="VARCHAR" />
+    <result column="module_ids" property="moduleIds" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="acquiesce" property="acquiesce" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    template_id, car_model_id, title, bg_pic_url, module_ids, status, acquiesce
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_model_template
+    where template_id = #{templateId,jdbcType=INTEGER}
+  </select>
+  <insert id="insertSelective" parameterType="com.htche.crm.domain.CarModelTemplate" >
+    insert into car_model_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        template_id,
+      </if>
+      <if test="carModelId != null" >
+        car_model_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="bgPicUrl != null" >
+        bg_pic_url,
+      </if>
+      <if test="moduleIds != null" >
+        module_ids,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="acquiesce != null" >
+        acquiesce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="templateId != null" >
+        #{templateId,jdbcType=INTEGER},
+      </if>
+      <if test="carModelId != null" >
+        #{carModelId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="bgPicUrl != null" >
+        #{bgPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIds != null" >
+        #{moduleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="acquiesce != null" >
+        #{acquiesce,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.htche.crm.domain.CarModelTemplate" >
+    update car_model_template
+    <set >
+      <if test="carModelId != null" >
+        car_model_id = #{carModelId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="bgPicUrl != null" >
+        bg_pic_url = #{bgPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleIds != null" >
+        module_ids = #{moduleIds,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="acquiesce != null" >
+        acquiesce = #{acquiesce,jdbcType=INTEGER},
+      </if>
+    </set>
+    where template_id = #{templateId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from car_model_template
+    where status = 1
+    and car_model_id = #{carModelId,jdbcType=INTEGER}
+    order by acquiesce DESC ,1 DESC limit 1
+  </select>
+  <update id="updateStatus" parameterType="map">
+    UPDATE car_model_template SET
+    status = #{status,jdbcType=INTEGER}
+    where template_id = #{templateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateAcquiesce" parameterType="map">
+    UPDATE car_model_template SET
+    acquiesce = 0
+    where car_model_id = #{carModelId,jdbcType=INTEGER};
+    UPDATE car_model_template SET
+    acquiesce = 1
+    where template_id = #{templateId,jdbcType=INTEGER}
+  </update>
+</mapper>

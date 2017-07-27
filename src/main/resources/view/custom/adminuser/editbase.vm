@@ -1,0 +1,60 @@
+<section class="content-header">
+    <h1>
+        账户设置
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">账户设置</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">账户设置</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">企业名称</label>
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="companyName"
+                                       value="$!companyName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">账号头像</label>
+
+                            <div class="col-sm-6">
+                                <input id="picUrl_file" name="file" type="file">
+                                <input type="hidden" id="picUrl" name="picUrl" value="$!picUrl">
+                                <input type="hidden" id="realPicUrl" value="$!realPicUrl">
+                                <span class="help-block">图片大小:宽:高=1:1</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary pull-right" id="save">保存</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+#set($cssUrls=[
+    "/plugins/fileinput/fileinput.min.css"
+])
+#set($jsUrls=[
+    "/plugins/fileinput/fileinput.min.js",
+    "/plugins/fileinput/fileinput_locale_zh.js",
+    "/js/custom/adminuser/editbase.js"
+])

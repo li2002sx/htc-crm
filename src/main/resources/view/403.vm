@@ -1,0 +1,17 @@
+<section class="content-header">
+    <h1>
+        403
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">403</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="callout callout-danger">
+        <h4>Warning!</h4>
+
+        <p>对不起，您没有访问此页面的权限.</p>
+    </div>
+</section>

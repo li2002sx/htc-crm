@@ -1,0 +1,64 @@
+#set($layout = "layout/empty.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>车车互联管理系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/css/htc.css?v=${timestamp}">
+    <!-- layer -->
+    <link rel="stylesheet" href="/plugins/layer/layer.css?v=${timestamp}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div class="logo"><img src="/images/logo.png" width="162" height="70" alt="车车互联网管理系统" /></div>
+
+<div class="main">
+    <form class="form-horizontal" method="post">
+        <div class="login-box">
+            <ul>
+                <li><input type="text" placeholder="帐号" class="txt01" name="name" /></li>
+                <li><input type="password" placeholder="密码" class="txt01" name="password" /></li>
+                <li class="reme">
+                    <label class="loglab"><input type="checkbox" class="chk01" name="rememberMe">记住我</label>
+    ##                <div class="boxtip">错误提示</div>
+                </li>
+                <li>
+                    <button type="submit" class="btn01">登录</button>
+                </li>
+            </ul>
+            <div class="boxbg"></div>
+        </div>
+    </form>
+    <div class="main-footer">
+        <p class="help-block" style="font-size: 13px;">Copyright &copy; 2017-2025 车多多（天津）网络科技有限公司. All rights reserved.
+            <a href="http://www.miitbeian.gov.cn" target="_blank">津ICP备16008400号-3</a>
+        </p>
+    </div>
+</div>
+
+<!-- jQuery 2.2.3 -->
+<script src="/js/util/jquery-2.2.3.min.js?v=${timestamp}"></script>
+<!-- layer -->
+<script src="/plugins/layer/layer.js?v=${timestamp}"></script>
+<!-- common.ext.js -->
+<script src="/js/util/common.ext.js?v=${timestamp}"></script>
+<script>
+    $(function () {
+        var msg = "$!msg";
+        if (msg.length > 0) {
+            $.err(msg);
+        }
+    });
+</script>
+</body>
+</html>

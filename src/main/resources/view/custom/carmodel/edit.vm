@@ -1,0 +1,95 @@
+<section class="content-header">
+    <h1>
+        车型管理
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="/carmodel/list">车型管理</a></li>
+        <li class="active">添加修改车型</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">添加修改车型</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="carModelId" value="$!carModel.carModelId">
+                            <label class="col-sm-2 control-label">规格</label>
+
+                            <div class="col-sm-3">
+                                <select class="form-control" id="specId">
+                                    #foreach($key in ${specMap.keySet()})
+                                        <option value="$key"
+                                            #if($!carModel.specId == $!key)
+                                                selected
+                                            #end
+                                        >${specMap.get($key)}</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="models">
+                            <label class="col-sm-2 control-label">品牌</label>
+                            <div class="col-sm-2">
+                                <select class="form-control brand" id="brandId" data-value="$!carModel.brandId">
+
+                                </select>
+                            </div>
+
+                            <label class="col-sm-1 control-label">车系</label>
+                            <div class="col-sm-2">
+                                <select class="form-control series" id="seriesId" data-value="$!carModel.seriesId">
+
+                                </select>
+                            </div>
+
+                            <label class="col-sm-1 control-label">车型</label>
+                            <div class="col-sm-3">
+                                <select class="form-control models" id="modelsId" data-value="$!carModel.modelsId">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">车型配图</label>
+
+                            <div class="col-sm-6">
+                                <input id="picUrl_file" name="file" type="file">
+                                <input type="hidden" id="picUrl" name="picUrl" value="$!picUrl">
+                                <input type="hidden" id="realPicUrl" value="$!realPicUrl">
+                                <span class="help-block">图片大小:宽:高=4:3</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary pull-right" id="save">保存</button>
+                        <button type="button" class="btn btn-default pull-right" id="cancel" style="margin-right: 5px;">取消</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+#set($cssUrls=[
+    "/plugins/fileinput/fileinput.min.css"
+])
+#set($jsUrls=[
+    "/plugins/datepicker/bootstrap-datepicker.js",
+    "/plugins/datepicker/bootstrap-datepicker.zh-CN.js",
+    "/plugins/cxselect/jquery.cxselect.js",
+    "/plugins/fileinput/fileinput.min.js",
+    "/plugins/fileinput/fileinput_locale_zh.js",
+    "/js/custom/carmodel/edit.js"
+])

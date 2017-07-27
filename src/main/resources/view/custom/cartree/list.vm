@@ -1,0 +1,56 @@
+<section class="content-header">
+    <h1>
+        品牌管理
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">品牌</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">品牌/车系/车型</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row form-group">
+                        <div class="col-xs-6">
+                            <div class="btn-group">
+                                <span><button type="button" class="btn btn-info btn-sm"
+                                              id="addParent">增加父节点</button></span>
+                                <span><button type="button" class="btn btn-info btn-sm"
+                                              id="addLeaf">增加叶子节点</button></span>
+                                <span><button type="button" class="btn btn-info btn-sm" id="edit">编辑名称</button></span>
+                                <span><button type="button" class="btn btn-info btn-sm" id="remove">删除节点</button></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="zTreeDemoBackground left">
+                        <ul id="treeDemo" class="ztree"></ul>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+#set($cssUrls=[
+    "/plugins/ztree/zTreeStyle.css"
+])
+#set($jsUrls=[
+    "/plugins/ztree/jquery.ztree.core.min.js",
+    "/plugins/ztree/jquery.ztree.excheck.min.js",
+    "/plugins/ztree/jquery.ztree.exedit.min.js",
+    "/js/custom/cartree/list.js"
+])
+<script type="text/javascript">
+    var carTrees = $!carTrees;
+    var startCount = $!startCount;
+</script>

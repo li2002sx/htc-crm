@@ -1,0 +1,85 @@
+<section class="content-header">
+    <h1>
+        $!modelsName > $!carModelModule.title
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="/carmodel/list">车型管理</a></li>
+        <li><a href="/carmodule/list?modelid=$!carModelId">车型模块管理</a></li>
+        <li><a href="/moduleinfo/list?moduleid=$!moduleId&modelid=$!carModelId">车型模块信息管理</a></li>
+        <li class="active">添加修改</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">添加修改车型模块信息 > $!carModelModule.title</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input type="hidden" id="moduleInfoId" value="$!carModuleInfo.moduleInfoId">
+                            <input type="hidden" id="moduleId" value="$!carModuleInfo.moduleId">
+                            <input type="hidden" id="carModelId" value="$!carModelId">
+                            <label class="col-sm-2 control-label">标题名称</label>
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="title" value="$!carModuleInfo.title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">配图1</label>
+
+                            <div class="col-sm-6">
+                                <input id="picUrl_file" name="file" type="file" multiple="multiple">
+                                <input type="hidden" id="picUrl" value="$!picUrl">
+                                <input type="hidden" id="realPicUrl" value="$!realPicUrl">
+                                <input type="hidden" id="picUrl2" value="$!picUrl2">
+                                <input type="hidden" id="realPicUrl2" value="$!realPicUrl2">
+                                <span class="help-block">最多2张图片，目前只有车型颜色需要传颜色小图</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">连接地址</label>
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="url" value="$!carModuleInfo.url">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">序号</label>
+
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="orderNo" value="$!carModuleInfo.orderNo">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary pull-right" id="save">保存</button>
+                        <button type="button" class="btn btn-default pull-right" id="cancel" style="margin-right: 5px;">取消</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<script type="text/javascript">
+    var carModelId = "$!carModelId";
+</script>
+#set($cssUrls=[
+    "/plugins/fileinput/fileinput.min.css"
+])
+#set($jsUrls=[
+    "/plugins/fileinput/fileinput.min.js",
+    "/plugins/fileinput/fileinput_locale_zh.js",
+    "/js/custom/carmoduleinfo/edit.js"
+])

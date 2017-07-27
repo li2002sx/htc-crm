@@ -1,0 +1,57 @@
+<section class="content-header">
+    <h1>
+        短信模板
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">短信模板</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">短信模板</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <form class="form-horizontal">
+                        <div class="row form-group">
+
+                            <div class="col-xs-3">
+                                <div class="btn-group">
+                                    <span><a href="/smstemplate/edit/0" class="btn btn-info">新增</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <table class="table table-bordered" id="table"
+                           data-row-style="rowStyle"
+                           data-pagination="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-showColumns="true">
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+#set($cssUrls=[
+    "/plugins/bootstrap-table/bootstrap-table.min.css",
+    "/plugins/datepicker/datepicker3.css"
+])
+#set($jsUrls=[
+    "/plugins/bootstrap-table/bootstrap-table.js",
+    "/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js",
+    "/plugins/datepicker/bootstrap-datepicker.js",
+    "/plugins/datepicker/bootstrap-datepicker.zh-CN.js",
+    "/js/custom/smstemplate/list.js"
+])

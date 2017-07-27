@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.htche.crm.mapper.RechargeRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.htche.crm.domain.RechargeRecord" >
+    <id column="recharge_id" property="rechargeId" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="recharge_number" property="rechargeNumber" jdbcType="VARCHAR" />
+    <result column="recharge_type" property="rechargeType" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="VARCHAR" />
+    <result column="business_type" property="businessType" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="finish_time" property="finishTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="LONGVARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="pay_id" property="payId" jdbcType="VARCHAR" />
+    <result column="transaction_id" property="transactionId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    recharge_id, amount, recharge_number, recharge_type, order_number, business_type, 
+    create_time, finish_time, remark, status, pay_id, transaction_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from recharge_record
+    where recharge_id = #{rechargeId,jdbcType=INTEGER}
+  </select>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="rechargeId" parameterType="com.htche.crm.domain.RechargeRecord" >
+    insert into recharge_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rechargeId != null" >
+        recharge_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="rechargeNumber != null" >
+        recharge_number,
+      </if>
+      <if test="rechargeType != null" >
+        recharge_type,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="businessType != null" >
+        business_type,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="finishTime != null" >
+        finish_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="transactionId != null" >
+        transaction_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rechargeId != null" >
+        #{rechargeId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="rechargeNumber != null" >
+        #{rechargeNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeType != null" >
+        #{rechargeType,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null" >
+        #{businessType,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finishTime != null" >
+        #{finishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionId != null" >
+        #{transactionId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByOrderNumber" resultMap="BaseResultMap" parameterType="String">
+    select
+    <include refid="Base_Column_List"/>
+    from recharge_record
+    where order_number = #{orderNumber,jdbcType=VARCHAR}
+    order by 1 desc limit 1
+  </select>
+  <update id="updatePayIdByRechargeId" parameterType="map">
+    update recharge_record
+    set pay_id = #{payId,jdbcType=VARCHAR}
+    where recharge_id = #{rechargeId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPayId" resultMap="BaseResultMap" parameterType="String">
+    select
+    <include refid="Base_Column_List"/>
+    from recharge_record
+    where pay_id = #{payId,jdbcType=VARCHAR}
+    order by recharge_id desc
+  </select>
+  <update id="updatePayResult" parameterType="map">
+    update recharge_record
+    set status = #{status,jdbcType=INTEGER},
+    finish_time = #{finishTime,jdbcType=TIMESTAMP},
+    remark = #{remark,jdbcType=LONGVARCHAR},
+    transaction_id = #{transactionId,jdbcType=VARCHAR}
+    where status = 0
+    and recharge_id = #{rechargeId,jdbcType=INTEGER}
+  </update>
+</mapper>

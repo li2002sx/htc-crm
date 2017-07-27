@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* CSS Document */
+
+html{ color:#333333; background:#f1f1f1; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{ margin:0; padding:0;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section{ display:block;}
+audio, canvas, video{ display:inline-block; *display:inline; *zoom:1;}
+body, button, input, textarea{ font:12px/1.5 "\5FAE\8F6F\96C5\9ED1", "\5B8B\4F53", arial, tahoma, sans-serif;}
+input, select, textarea{ font-size:100%; outline:none;}
+table{ border-collapse:collapse; border-spacing:0;}
+th{ text-align:inherit;}
+fieldset, img{ border:0;}
+img{ vertical-align:top;}
+iframe{ display:block;}
+abbr, acronym{ border:0; font-variant:normal;}
+del{ text-decoration:line-through;}
+address, caption, cite, code, dfn, em, th, var{ font-style:normal; font-weight:500;}
+ol, ul{ list-style:none;}
+caption, th{ text-align:left;}
+h1, h2, h3, h4, h5, h6{ font-size:100%; font-weight:500;}
+q:before, q:after{ content:'';}
+sub, sup{ font-size:75%; line-height:0; position:relative; vertical-align:baseline;}
+sup{ top:-0.5em;}
+sub{ bottom:-0.25em;}
+
+
+.logo{ position:absolute; top:30px; left:60px;}
+
+.main{ width:100%; height:440px; margin:0 auto; padding-top:340px;margin-top: -30px; background:url(/images/big-bg.png)  center no-repeat;}
+.login-box{ width:400px; height:300px; margin:0 auto; position:relative;}
+.login-box ul{ width:300px; margin:0 auto; padding-top:50px; position:relative; z-index:2;}
+.login-box ul li{}
+.login-box ul li.reme{ padding-bottom:26px; position:relative;}
+.boxtip{ height:26px; line-height:26px; color:#FF0000; position:absolute; bottom:0; left:0;}
+.login-box .txt01{ width:286px; height:42px; line-height:42px; margin-bottom:10px; padding-left:12px; border:1px solid #ababab; font-size:16px; color:#808080;}
+.login-box .loglab{ display:inline-block; height:26px; line-height:26px; padding:0 20px 0 3px; font-size:16px; color:#808080;}
+.login-box .loglab .chk01{ float:left; margin:8px 5px 0 0;}
+.login-box ul .btn01{ display:block; width:298px; height:42px; line-height:42px; text-align:center; background-color:#006aba; border:1px solid #005fa7; color:#FFFFFF; text-decoration:none; font-size:16px;}
+.boxbg{ width:400px; height:300px; background-color:#FFFFFF; filter:alpha(opacity=80); -moz-opacity:0.8; opacity:0.8; position:absolute; left:0; top:0; z-index:1;}
+
+.main-footer {
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    position: fixed;
+    bottom: 20px;
+    color: #737373;
+    opacity: 0.8;
+}
+.main-footer a{
+    color: #737373;
+}
+

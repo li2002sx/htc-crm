@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.htche.crm.mapper.CarModelMapper" >
+  <resultMap id="BaseResultMap" type="com.htche.crm.domain.CarModel" >
+    <id column="car_model_id" property="carModelId" jdbcType="INTEGER" />
+    <result column="spec_id" property="specId" jdbcType="INTEGER" />
+    <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="series_id" property="seriesId" jdbcType="INTEGER" />
+    <result column="models_id" property="modelsId" jdbcType="INTEGER" />
+    <result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    car_model_id, spec_id, brand_id, series_id, models_id, pic_url, status, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_model
+    where car_model_id = #{carModelId,jdbcType=INTEGER}
+  </select>
+  <insert id="insertSelective" parameterType="com.htche.crm.domain.CarModel" >
+    insert into car_model
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carModelId != null" >
+        car_model_id,
+      </if>
+      <if test="specId != null" >
+        spec_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="seriesId != null" >
+        series_id,
+      </if>
+      <if test="modelsId != null" >
+        models_id,
+      </if>
+      <if test="picUrl != null" >
+        pic_url,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carModelId != null" >
+        #{carModelId,jdbcType=INTEGER},
+      </if>
+      <if test="specId != null" >
+        #{specId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="seriesId != null" >
+        #{seriesId,jdbcType=INTEGER},
+      </if>
+      <if test="modelsId != null" >
+        #{modelsId,jdbcType=INTEGER},
+      </if>
+      <if test="picUrl != null" >
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.htche.crm.domain.CarModel" >
+    update car_model
+    <set >
+      <if test="specId != null" >
+        spec_id = #{specId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="seriesId != null" >
+        series_id = #{seriesId,jdbcType=INTEGER},
+      </if>
+      <if test="modelsId != null" >
+        models_id = #{modelsId,jdbcType=INTEGER},
+      </if>
+      <if test="picUrl != null" >
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where car_model_id = #{carModelId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from car_model
+    where status = 1
+    <if test="carModelId != null and carModelId != 0">
+      and car_model_id = #{carModelId,jdbcType=INTEGER}
+    </if>
+    <if test="specId != null and specId != 0">
+      and spec_id = #{specId,jdbcType=INTEGER}
+    </if>
+    <if test="brandId != null and brandId != 0">
+      and brand_id = #{brandId,jdbcType=INTEGER}
+    </if>
+    <if test="searchKey != null">
+      and models_id IN (SELECT id from car_tree WHERE pId > 0 AND name LIKE CONCAT('%',#{searchKey},'%'))
+    </if>
+    order by 1 desc
+  </select>
+  <update id="updateStatus" parameterType="map">
+    UPDATE car_model SET
+    status = #{status,jdbcType=INTEGER}
+    where car_model_id = #{carModelId,jdbcType=INTEGER}
+  </update>
+</mapper>

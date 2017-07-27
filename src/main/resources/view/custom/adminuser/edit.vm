@@ -1,0 +1,74 @@
+<section class="content-header">
+    <h1>
+        管理员管理
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="/adminuser/list">管理员管理</a></li>
+        <li class="active">添加修改管理员</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">添加修改管理员</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="adminUserId" value="$!adminUser.adminUserId">
+                            <label class="col-sm-2 control-label">名称</label>
+
+                            <div class="col-sm-6">
+                                <input type="text" class="form-control" id="userName" value="$!adminUser.userName">
+                            </div>
+                        </div>
+                        <div class="form-group" id="region">
+                            <label class="col-sm-2 control-label">角色</label>
+
+                            <div class="col-sm-6">
+                                <select class="form-control" id="roleId">
+                                    #foreach($key in ${carDealerMap.keySet()})
+                                        <option value="$key"
+                                            #if($!adminUser.roleId == $!key)
+                                                selected
+                                            #end
+                                        >${carDealerMap.get($key)}</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="3" id="remark">$!adminUser.remark</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary pull-right" id="save">保存</button>
+                        <button type="button" class="btn btn-default pull-right" id="cancel" style="margin-right: 5px;">取消</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+#set($cssUrls=[
+    "/plugins/datepicker/datepicker3.css"
+])
+#set($jsUrls=[
+    "/plugins/datepicker/bootstrap-datepicker.js",
+    "/plugins/datepicker/bootstrap-datepicker.zh-CN.js",
+    "/js/custom/adminuser/edit.js"
+])

@@ -1,0 +1,203 @@
+<section class="content-header">
+    <h1>
+        平行进口车价格指数
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="/carinfo/list">平行进口车价格指数</a></li>
+        <li class="active">添加修改指数</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">添加修改指数</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="carInfoId" value="$!carInfo.carInfoId">
+                            <label class="col-sm-2 control-label">规格</label>
+
+                            <div class="col-sm-3">
+                                <select class="form-control" id="specId">
+                                    #foreach($key in ${specMap.keySet()})
+                                        <option value="$key"
+                                            #if($!carInfo.specId == $!key)
+                                                selected
+                                            #end
+                                        >${specMap.get($key)}</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="models">
+                            <label class="col-sm-2 control-label">品牌</label>
+                            <div class="col-sm-2">
+                                <select class="form-control brand" id="brandId" data-value="$!carInfo.brandId">
+
+                                </select>
+                            </div>
+
+                            <label class="col-sm-1 control-label">车系</label>
+                            <div class="col-sm-2">
+                                <select class="form-control series" id="seriesId" data-value="$!carInfo.seriesId">
+
+                                </select>
+                            </div>
+
+                            <label class="col-sm-1 control-label">车型</label>
+                            <div class="col-sm-3">
+                                <select class="form-control models" id="modelsId" data-value="$!carInfo.modelsId">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">配置</label>
+
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="3" id="configure">$!carInfo.configure</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">车架号</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="frame" value="$!carInfo.frame">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">外观颜色</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="outColor" value="$!carInfo.outColor">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">内饰颜色</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="inColor" value="$!carInfo.inColor">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">车源状态</label>
+
+                            <div class="col-sm-3">
+                                <select class="form-control" id="sourceId">
+                                    #foreach($key in ${sourceMap.keySet()})
+                                        <option value="$key"
+                                            #if($!carInfo.sourceId == $!key)
+                                                selected
+                                            #end
+                                        >${sourceMap.get($key)}</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">手续状态</label>
+
+                            <div class="col-sm-3">
+                                <select class="form-control" id="procedureId">
+                                    #foreach($key in ${procedureMap.keySet()})
+                                        <option value="$key"
+                                            #if($!carInfo.procedureId == $!key)
+                                                selected
+                                            #end
+                                        >${procedureMap.get($key)}</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="region">
+                            <label class="col-sm-2 control-label">地区</label>
+
+                            <div class="col-sm-3">
+                                <select class="form-control province" id="provinceId" data-value="$!carInfo.provinceId">
+
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="form-control city" id="cityId" data-value="$!carInfo.cityId">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">价格</label>
+
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="price" value="$!carInfo.price">
+                                    <span class="input-group-addon">万</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">价格占比</label>
+
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="priceRatio" value="$!carInfo.priceRatio">
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">年份</label>
+                            <div class="col-sm-1">
+                                <select class="form-control" id="year">
+                                    #foreach($year in [2018..2014])
+                                        <option value="$year"
+                                            #if($!carInfo.year == $!year)
+                                                selected
+                                            #end
+                                        >$!year</option>
+                                    #end
+                                </select>
+                            </div>
+
+                            <label class="col-sm-1 control-label">月份</label>
+                            <div class="col-sm-1">
+                                <select class="form-control" id="month">
+                                    #foreach($month in [1..12])
+                                        <option value="$month"
+                                            #if($!carInfo.month == $!month)
+                                                selected
+                                            #end
+                                        >$!month</option>
+                                    #end
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary pull-right" id="save">保存</button>
+                        <button type="button" class="btn btn-default pull-right" id="cancel" style="margin-right: 5px;">取消</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+#set($cssUrls=[
+    "/plugins/datepicker/datepicker3.css"
+])
+#set($jsUrls=[
+    "/plugins/datepicker/bootstrap-datepicker.js",
+    "/plugins/datepicker/bootstrap-datepicker.zh-CN.js",
+    "/plugins/cxselect/cityData.json",
+    "/plugins/cxselect/jquery.cxselect.js",
+    "/js/custom/carinfo/edit.js"
+])

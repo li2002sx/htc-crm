@@ -1,0 +1,103 @@
+<section class="content-header">
+    <h1>
+        车主管理
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li><a href="/carowner/list">车主管理</a></li>
+        <li class="active">添加修改车主</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">添加修改车主</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="carOwnerId" value="$!carOwner.carOwnerId">
+                            <label class="col-sm-2 control-label">车主姓名</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="name" value="$!carOwner.name">
+                            </div>
+                        </div>
+                        <div class="form-group" id="region">
+                            <label class="col-sm-2 control-label">车主地区</label>
+
+                            <div class="col-sm-3">
+                                <select class="form-control province" id="provinceId" data-value="$!carOwner.provinceId">
+
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="form-control city" id="cityId" data-value="$!carOwner.cityId">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">购车类型</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="buyCarModels" value="$!carOwner.buyCarModels">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">购车时间</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="buyTime" value="$!date.format('yyyy-MM-dd',$!carOwner.buyTime)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">联系电话</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="phone" value="$!carOwner.phone">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">地址</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="address" value="$!carOwner.address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">身份证</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="cardNo" value="$!carOwner.cardNo">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-primary pull-right" id="save">保存</button>
+                        <button type="button" class="btn btn-default pull-right" id="cancel" style="margin-right: 5px;">取消</button>
+                    </div>
+                    <!-- /.box-footer -->
+                </form>
+            </div>
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+#set($cssUrls=[
+    "/plugins/datepicker/datepicker3.css"
+])
+#set($jsUrls=[
+    "/plugins/datepicker/bootstrap-datepicker.js",
+    "/plugins/datepicker/bootstrap-datepicker.zh-CN.js",
+    "/plugins/cxselect/cityData.json",
+    "/plugins/cxselect/jquery.cxselect.js",
+    "/js/custom/carowner/edit.js"
+])

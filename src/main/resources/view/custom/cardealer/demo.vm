@@ -1,0 +1,103 @@
+<section class="content-header">
+    <h1>
+        Simple Tables
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Simple</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Bordered Table</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="form-group">
+                        <div class="btn btn-default">ALL</div>
+                        <div class="btn btn-info">CATEGORY ONE</div>
+                        <div class="btn btn-default">CATEGORY TWO</div>
+                        <div class="btn btn-default">CATEGORY THREE</div>
+                        <div class="btn btn-default">CATEGORY FOUR</div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <input type="text" class="form-control" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <input type="text" class="form-control" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">名称</span>
+                                <select class="form-control select2">
+                                    <option selected="selected">Alabama</option>
+                                    <option>Alaska</option>
+                                    <option>California</option>
+                                    <option>Delaware</option>
+                                    <option>Tennessee</option>
+                                    <option>Texas</option>
+                                    <option>Washington</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-xs-3">
+                            <div class="input-group date">
+                                <span class="input-group-addon">开始时间</span>
+                                <input type="text" class="form-control pull-right" id="datepicker">
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="input-group date">
+                                <span class="input-group-addon">结束时间</span>
+                                <input type="text" class="form-control pull-right" id="datepicker2">
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="btn-group">
+                                <span><button type="button" class="btn btn-info" id="search">搜索</button></span>
+                                <span><a href="/cardealer/edit" class="btn btn-info">新增</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-bordered" id="table"
+                           data-pagination="true"
+                           data-show-refresh="true"
+                           data-show-toggle="true"
+                           data-showColumns="true">
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+#set($cssUrls=[
+    "/plugins/bootstrap-table/bootstrap-table.min.css",
+    "/plugins/datepicker/datepicker3.css"
+])
+#set($jsUrls=[
+    "/plugins/bootstrap-table/bootstrap-table.js",
+    "/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js",
+    "/plugins/datepicker/bootstrap-datepicker.js",
+    "/plugins/datepicker/bootstrap-datepicker.zh-CN.js",
+    "/js/custom/cardealer/list.js"
+])

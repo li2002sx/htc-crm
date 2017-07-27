@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.htche.crm.mapper.CarOwnerMapper" >
+  <resultMap id="BaseResultMap" type="com.htche.crm.domain.CarOwner" >
+    <id column="car_owner_id" property="carOwnerId" jdbcType="INTEGER" />
+    <result column="car_dealer_id" property="carDealerId" jdbcType="INTEGER" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+    <result column="buy_time" property="buyTime" jdbcType="TIMESTAMP" />
+    <result column="buy_car_models" property="buyCarModels" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sms_time" property="smsTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    car_owner_id, car_dealer_id, province_id, city_id, name, phone, address, card_no, 
+    birthday, buy_time, buy_car_models, status, sms_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_owner
+    where car_owner_id = #{carOwnerId,jdbcType=INTEGER}
+  </select>
+  <insert id="insertSelective" parameterType="com.htche.crm.domain.CarOwner" >
+    insert into car_owner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carOwnerId != null" >
+        car_owner_id,
+      </if>
+      <if test="carDealerId != null" >
+        car_dealer_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="buyTime != null" >
+        buy_time,
+      </if>
+      <if test="buyCarModels != null" >
+        buy_car_models,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="smsTime != null" >
+        sms_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carOwnerId != null" >
+        #{carOwnerId,jdbcType=INTEGER},
+      </if>
+      <if test="carDealerId != null" >
+        #{carDealerId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyTime != null" >
+        #{buyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyCarModels != null" >
+        #{buyCarModels,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="smsTime != null" >
+        #{smsTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.htche.crm.domain.CarOwner" >
+    update car_owner
+    <set >
+      <if test="carDealerId != null" >
+        car_dealer_id = #{carDealerId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyTime != null" >
+        buy_time = #{buyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyCarModels != null" >
+        buy_car_models = #{buyCarModels,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="smsTime != null" >
+        sms_time = #{smsTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where car_owner_id = #{carOwnerId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from car_owner
+    where status = 1
+    <if test="carDealerId != null and carDealerId != 0" >
+      and car_dealer_id = #{carDealerId,jdbcType=INTEGER}
+    </if>
+    <if test="name != null">
+      and name like CONCAT('%',#{name},'%')
+    </if>
+    order by 1 desc
+  </select>
+  <update id="updateStatus" parameterType="map">
+    UPDATE car_owner SET
+    status = #{status,jdbcType=INTEGER}
+    where car_owner_id = #{carOwnerId,jdbcType=INTEGER}
+  </update>
+  <select id="selectCount" parameterType="map" resultType="java.lang.Integer">
+    select count(1)
+    from car_owner
+    where status = 1
+    <if test="carDealerId != null and carDealerId != 0" >
+      and car_dealer_id = #{carDealerId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectMonthBirthdayCount" parameterType="map" resultType="java.lang.Integer">
+    select count(1)
+    from car_owner
+    where status = 1
+    and month(birthday) = month(curdate())
+    and day(birthday) between 1 and day(last_day(curdate()))
+    <if test="carDealerId != null and carDealerId != 0" >
+      and car_dealer_id = #{carDealerId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectDayBirthdayCount" parameterType="map" resultType="java.lang.Integer">
+    select count(1)
+    from car_owner
+    where status = 1
+    and month(birthday) = month(curdate())
+    and day(birthday) = = day(curdate())
+    <if test="carDealerId != null and carDealerId != 0" >
+      and car_dealer_id = #{carDealerId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectDayBirthdayList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from car_owner
+    where status = 1
+    and month(birthday) = month(curdate())
+    and day(birthday)  = day(curdate())
+    and (sms_time is NULL or DATE_FORMAT(sms_time,'%Y-%m-%d') != curdate())
+    <![CDATA[
+        and car_dealer_id > 0
+    ]]>
+    <if test="carDealerId != null and carDealerId != 0" >
+      and car_dealer_id = #{carDealerId,jdbcType=INTEGER}
+    </if>
+  </select>
+  <update id="updateDayBirthday" parameterType="map">
+    UPDATE car_owner SET
+    sms_time = #{smsTime,jdbcType=TIMESTAMP}
+    where car_owner_id = #{carOwnerId,jdbcType=INTEGER}
+  </update>
+</mapper>

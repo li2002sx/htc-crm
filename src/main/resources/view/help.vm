@@ -1,0 +1,32 @@
+<section class="content-header">
+    <h1>
+        使用说明
+        <small>preview of simple tables</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="/welcome"><i class="fa fa-dashboard"></i> 首页</a></li>
+        <li class="active">使用说明</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">使用说明</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                    <ul>
+                        <li>新建车商，注册互艺无线账号，将APPID，APPKEY修改到对应的车商信息中</li>
+                        <li>新建管理员账号，角色关联到对应车商上，同时生成密码，并记录</li>
+                        <li>新建短信模板，客户姓名用{name}代替，同时提交互艺做模板备案，{name}替换为【变量】</li>
+                        <li>互艺模板审核通过，后台把模板从待审变为正常，车商就可以使用</li>
+                        <li>账号给到车商，车商通过账号登陆，添加盟商，车主，同时设置模板</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

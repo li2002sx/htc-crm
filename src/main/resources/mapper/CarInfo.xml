@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.htche.crm.mapper.CarInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.htche.crm.domain.CarInfo" >
+    <id column="car_info_id" property="carInfoId" jdbcType="INTEGER" />
+    <result column="spec_id" property="specId" jdbcType="INTEGER" />
+    <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="series_id" property="seriesId" jdbcType="INTEGER" />
+    <result column="models_id" property="modelsId" jdbcType="INTEGER" />
+    <result column="configure" property="configure" jdbcType="VARCHAR" />
+    <result column="frame" property="frame" jdbcType="VARCHAR" />
+    <result column="out_color" property="outColor" jdbcType="VARCHAR" />
+    <result column="in_color" property="inColor" jdbcType="VARCHAR" />
+    <result column="source_id" property="sourceId" jdbcType="INTEGER" />
+    <result column="procedure_id" property="procedureId" jdbcType="INTEGER" />
+    <result column="province_id" property="provinceId" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="year" property="year" jdbcType="INTEGER" />
+    <result column="month" property="month" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="price_ratio" property="priceRatio" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    car_info_id, spec_id, brand_id, series_id, models_id, configure, frame, out_color, in_color,
+    source_id, procedure_id, province_id, city_id, price, year, month, status, price_ratio
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car_info
+    where car_info_id = #{carInfoId,jdbcType=INTEGER}
+  </select>
+  <insert id="insertSelective" parameterType="com.htche.crm.domain.CarInfo" >
+    insert into car_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carInfoId != null" >
+        car_info_id,
+      </if>
+      <if test="specId != null" >
+        spec_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="seriesId != null" >
+        series_id,
+      </if>
+      <if test="modelsId != null" >
+        models_id,
+      </if>
+      <if test="configure != null" >
+        configure,
+      </if>
+      <if test="frame != null" >
+        frame,
+      </if>
+      <if test="outColor != null" >
+        out_color,
+      </if>
+      <if test="inColor != null" >
+        in_color,
+      </if>
+      <if test="sourceId != null" >
+        source_id,
+      </if>
+      <if test="procedureId != null" >
+        procedure_id,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="year != null" >
+        year,
+      </if>
+      <if test="month != null" >
+        month,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="priceRatio != null" >
+        price_ratio,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carInfoId != null" >
+        #{carInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="specId != null" >
+        #{specId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="seriesId != null" >
+        #{seriesId,jdbcType=INTEGER},
+      </if>
+      <if test="modelsId != null" >
+        #{modelsId,jdbcType=INTEGER},
+      </if>
+      <if test="configure != null" >
+        #{configure,jdbcType=VARCHAR},
+      </if>
+      <if test="frame != null" >
+        #{frame,jdbcType=VARCHAR},
+      </if>
+      <if test="outColor != null" >
+        #{outColor,jdbcType=VARCHAR},
+      </if>
+      <if test="inColor != null" >
+        #{inColor,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceId != null" >
+        #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null" >
+        #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="year != null" >
+        #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        #{month,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="priceRatio != null" >
+        #{priceRatio,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.htche.crm.domain.CarInfo" >
+    update car_info
+    <set >
+      <if test="specId != null" >
+        spec_id = #{specId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="seriesId != null" >
+        series_id = #{seriesId,jdbcType=INTEGER},
+      </if>
+      <if test="modelsId != null" >
+        models_id = #{modelsId,jdbcType=INTEGER},
+      </if>
+      <if test="configure != null" >
+        configure = #{configure,jdbcType=VARCHAR},
+      </if>
+      <if test="frame != null" >
+        frame = #{frame,jdbcType=VARCHAR},
+      </if>
+      <if test="outColor != null" >
+        out_color = #{outColor,jdbcType=VARCHAR},
+      </if>
+      <if test="inColor != null" >
+        in_color = #{inColor,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceId != null" >
+        source_id = #{sourceId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null" >
+        procedure_id = #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=INTEGER},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="year != null" >
+        year = #{year,jdbcType=INTEGER},
+      </if>
+      <if test="month != null" >
+        month = #{month,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="priceRatio != null" >
+        price_ratio = #{priceRatio,jdbcType=INTEGER},
+      </if>
+    </set>
+    where car_info_id = #{carInfoId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAllList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from car_info
+    where status = 1
+    <if test="specId != null and specId != 0">
+      and spec_id = #{specId,jdbcType=INTEGER}
+    </if>
+    <if test="brandId != null and brandId != 0">
+      and brand_id = #{brandId,jdbcType=INTEGER}
+    </if>
+    <if test="provinceId != null and provinceId != 0">
+      and province_id = #{provinceId,jdbcType=INTEGER}
+    </if>
+    <if test="cityId != null and cityId != 0">
+      and city_id = #{cityId,jdbcType=INTEGER}
+    </if>
+    <if test="year != null and year != 0" >
+      and year = #{year,jdbcType=INTEGER}
+    </if>
+    <if test="month != null and month != 0" >
+      and month = #{month,jdbcType=INTEGER}
+    </if>
+    order by 1 desc
+  </select>
+  <update id="updateStatus" parameterType="map">
+    UPDATE car_info SET
+    status = #{status,jdbcType=INTEGER}
+    where car_info_id = #{carInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>
