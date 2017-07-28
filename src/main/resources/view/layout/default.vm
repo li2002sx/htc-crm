@@ -171,7 +171,8 @@
                         <ul class="treeview-menu menu-open">
                             <li><a href="/carmodel/list"><i class="fa fa-circle-o"></i> 车型管理</a></li>
                             <li><a href="/user/list"><i class="fa fa-circle-o"></i> 用户管理</a></li>
-                            <li><a href="/userphoto/list"><i class="fa fa-circle-o"></i> 用户照片管理</a></li>
+                            <li><a href="/usercar/list"><i class="fa fa-circle-o"></i> 用户车源管理</a></li>
+                            <li><a href="/userphoto/list"><i class="fa fa-circle-o"></i> 用户相册管理</a></li>
                             <li><a href="/userrecharge/list"><i class="fa fa-circle-o"></i> 充值管理</a></li>
                         </ul>
                     </li>

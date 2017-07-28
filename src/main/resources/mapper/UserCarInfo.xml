@@ -10,9 +10,10 @@
     <result column="frame" property="frame" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    user_car_info_id, car_model_id, user_id, price, configure, frame, remark, status
+    user_car_info_id, car_model_id, user_id, price, configure, frame, remark, status, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -47,6 +48,9 @@
       <if test="status != null" >
         status,
       </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="userCarInfoId != null" >
@@ -73,6 +77,9 @@
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.htche.crm.domain.UserCarInfo" >
@@ -96,6 +103,9 @@
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where user_car_info_id = #{userCarInfoId,jdbcType=INTEGER}
     and user_id = #{userId,jdbcType=INTEGER}
@@ -106,4 +116,19 @@
     from user_car_info
     where  car_model_id = #{carModelId,jdbcType=INTEGER}
   </select>
+  <select id="selectAllList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_car_info
+    where status = 1
+    <if test="userId != null">
+      and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    order by 1 desc
+  </select>
+  <update id="updateStatus" parameterType="map">
+    UPDATE user_car_info SET
+    status = #{status,jdbcType=INTEGER}
+    where user_car_info_id = #{userCarInfoId,jdbcType=INTEGER}
+  </update>
 </mapper>

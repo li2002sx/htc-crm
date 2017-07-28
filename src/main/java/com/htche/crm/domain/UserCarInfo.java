@@ -2,6 +2,8 @@ package com.htche.crm.domain;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class UserCarInfo {
     /**
@@ -43,4 +45,9 @@ public class UserCarInfo {
      * 状态 1-正常 10-回收站
      */
     private Integer status;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 }
