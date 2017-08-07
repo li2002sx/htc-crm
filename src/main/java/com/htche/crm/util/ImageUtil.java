@@ -22,7 +22,7 @@ public class ImageUtil {
         } else {
             String realPicUrl = def ? "/images/user2-160x160.jpg" : "";
             if (!StringUtils.isEmpty(picUrl)) {
-                realPicUrl = String.format("http://172.168.1.26:8071/upload/%s", picUrl);
+                realPicUrl = String.format("%s/upload/%s", ConfigUtil.WebUrl, picUrl);
             }
             return realPicUrl;
         }

@@ -1,7 +1,6 @@
 package com.htche.crm.util.pay;
 
 import com.github.wxpay.sdk.WXPayConfig;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.io.*;
 

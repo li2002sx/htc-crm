@@ -1,5 +1,6 @@
 package com.htche.crm;
 
+import com.htche.crm.util.ConfigUtil;
 import com.htche.crm.util.DateFormatter;
 import com.htche.crm.util.SecurityInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
@@ -42,8 +43,7 @@ public class WebBootstrap extends WebMvcConfigurerAdapter {
 
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://127.0.0.1:8080", "http://172.168.1.26:8080"
-                        , "http://192.168.1.103:8080", "http://m.grtstar.cn")
+                .allowedOrigins(ConfigUtil.AllowedOrigins)
                 .allowCredentials(true)
                 .maxAge(3600)
                 .allowedHeaders("*")
