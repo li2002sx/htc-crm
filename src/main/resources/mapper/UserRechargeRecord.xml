@@ -72,8 +72,8 @@
     select
     <include refid="Base_Column_List" />
     from user_recharge_record
-    where 1 = 1
-    <if test="userId != null">
+    where status = 1
+    <if test="userId != null and userId > 0">
       and user_id = #{userId,jdbcType=INTEGER}
     </if>
     order by 1 desc

@@ -21,7 +21,7 @@
     select
     <include refid="Base_Column_List" />
     from recharge_product
-    order by 1 desc
+    order by 1 asc
   </select>
   <select id="selectByPrice" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select

@@ -50,7 +50,7 @@ function initTable() {
             field: 'userId',
             title: '编号'
         }, {
-            field: 'title',
+            field: 'realName',
             title: '真实姓名'
         }, {
             field: 'mobile',
@@ -89,9 +89,9 @@ function initTable() {
             formatter: function (value, row, index) {
                 var sb = new StringBuilder();
                 // sb.appendFormat('<a class="btn" href="/user/edit/{0}"><i class="fa fa-fw fa-edit"></i></a>', row.userId);
-                sb.appendFormat('<a class="btn" title="用户照片" href="/usercarinfo/list/{0}"><i class="fa fa-fw fa-file-image-o"></i></a>', row.userId);
-                sb.appendFormat('<a class="btn" title="用户车型" href="/userphoto/list/{0}"><i class="fa fa-fw fa-file-code-o"></i></a>', row.userId);
-                sb.append(' <a class="btn remove"><i class="fa fa-fw fa-trash"></i></a>');
+                sb.appendFormat('<a class="btn" title="用户车型" href="/usercar/list?userid={0}"><i class="fa fa-fw fa-car"></i></a>', row.userId);
+                sb.appendFormat('<a class="btn" title="用户照片" href="/userphoto/list?userid={0}"><i class="fa fa-fw fa-file-image-o"></i></a>', row.userId);
+                // sb.append(' <a class="btn remove"><i class="fa fa-fw fa-trash"></i></a>');
                 return sb.toString();
             }
         },]

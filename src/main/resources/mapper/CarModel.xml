@@ -20,7 +20,7 @@
     from car_model
     where car_model_id = #{carModelId,jdbcType=INTEGER}
   </select>
-  <insert id="insertSelective" parameterType="com.htche.crm.domain.CarModel" >
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="carModelId" parameterType="com.htche.crm.domain.CarModel" >
     insert into car_model
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="carModelId != null" >
@@ -115,6 +115,9 @@
     </if>
     <if test="brandId != null and brandId != 0">
       and brand_id = #{brandId,jdbcType=INTEGER}
+    </if>
+    <if test="modelsId != null and modelsId != 0">
+      and models_id = #{modelsId,jdbcType=INTEGER}
     </if>
     <if test="searchKey != null">
       and models_id IN (SELECT id from car_tree WHERE pId > 0 AND name LIKE CONCAT('%',#{searchKey},'%'))

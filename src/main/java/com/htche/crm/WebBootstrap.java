@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -37,5 +38,16 @@ public class WebBootstrap extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SecurityInterceptor())
                 .addPathPatterns("/**/**");
+    }
+
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://127.0.0.1:8080", "http://172.168.1.26:8080"
+                        , "http://192.168.1.103:8080", "http://m.grtstar.cn")
+                .allowCredentials(true)
+                .maxAge(3600)
+                .allowedHeaders("*")
+//                .exposedHeaders("X-Auth-Token", "Authorization")
+                .allowedMethods("POST", "GET", "DELETE", "PUT", "OPTIONS");
     }
 }

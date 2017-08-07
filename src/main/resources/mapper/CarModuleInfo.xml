@@ -6,13 +6,13 @@
         <result column="module_id" property="moduleId" jdbcType="INTEGER"/>
         <result column="title" property="title" jdbcType="VARCHAR"/>
         <result column="pic_url" property="picUrl" jdbcType="VARCHAR"/>
-        <result column="pic_url2" property="picUrl2" jdbcType="VARCHAR"/>
+        <result column="color" property="color" jdbcType="VARCHAR"/>
         <result column="url" property="url" jdbcType="VARCHAR"/>
         <result column="order_no" property="orderNo" jdbcType="INTEGER"/>
         <result column="status" property="status" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    module_info_id, module_id, title, pic_url, pic_url2, url, order_no, status
+    module_info_id, module_id, title, pic_url, color, url, order_no, status
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -35,8 +35,8 @@
             <if test="picUrl != null">
                 pic_url,
             </if>
-            <if test="picUrl2 != null">
-                pic_url2,
+            <if test="color != null">
+                color,
             </if>
             <if test="url != null">
                 url,
@@ -61,8 +61,8 @@
             <if test="picUrl != null">
                 #{picUrl,jdbcType=VARCHAR},
             </if>
-            <if test="picUrl2 != null">
-                #{picUrl2,jdbcType=VARCHAR},
+            <if test="color != null">
+                #{color,jdbcType=VARCHAR},
             </if>
             <if test="url != null">
                 #{url,jdbcType=VARCHAR},
@@ -87,8 +87,8 @@
             <if test="picUrl != null">
                 pic_url = #{picUrl,jdbcType=VARCHAR},
             </if>
-            <if test="picUrl2 != null">
-                pic_url2 = #{picUrl2,jdbcType=VARCHAR},
+            <if test="color != null">
+                color = #{color,jdbcType=VARCHAR},
             </if>
             <if test="url != null">
                 url = #{url,jdbcType=VARCHAR},

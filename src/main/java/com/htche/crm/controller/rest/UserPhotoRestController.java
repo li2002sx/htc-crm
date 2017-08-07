@@ -37,10 +37,19 @@ public class UserPhotoRestController {
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
     public UserModel.UserPhotoList getPhotoList(
-            @RequestParam(value = "userId", required = true) Integer userId) {
+            @RequestParam(value = "userId", required = false) Integer userId,
+            @RequestParam(value = "pageIndex", required = true) Integer pageIndex) {
         UserModel.UserPhotoList userPhotoList = new UserModel.UserPhotoList();
+        if (userId == null || userId == 0) {
+            User user = CurrentUser.getInstance().getUser();
+            if (user != null) {
+                userId = user.getUserId();
+            }
+        }
         UserPhotoQuery userPhotoQuery = new UserPhotoQuery();
         userPhotoQuery.setUserId(userId);
+        userPhotoQuery.setPageIndex(pageIndex);
+        userPhotoQuery.setPageSize(40);
         List<UserPhoto> userPhotos = userPhotoBiz.selectAllList(userPhotoQuery);
         if (userPhotos != null && userPhotos.size() > 0) {
             userPhotos.forEach(item -> {
@@ -54,26 +63,26 @@ public class UserPhotoRestController {
 
     @RequestMapping(value = "upload", method = RequestMethod.POST)
     public ApiResult upload(
-            @RequestPart(required = false, value = "file") MultipartFile file,
-            @RequestParam(value = "cate", required = true) String cate,
-            @RequestParam(value = "subCate", required = false) String subCate) {
-
+            @RequestParam(value = "image", required = true) String image) {
         ApiResult apiResult = new ApiResult();
         apiResult.setStatus(0);
 
         User user = CurrentUser.getInstance().getUser();
         if (user != null) {
-            AjaxResult result = ImageUtil.upload(file, cate, subCate);
-            if (result.isSuccess()) {
+            String picUrl;
+            AjaxResult ajaxResult = ImageUtil.saveBase64ToPic(image, "userphoto", user.getUserId().toString());
+            if (ajaxResult.isSuccess()) {
+                picUrl = ajaxResult.getValue().toString();
                 UserPhoto userPhoto = new UserPhoto();
+                userPhoto.setPhotoId(0);
                 userPhoto.setUserId(user.getUserId());
                 userPhoto.setStatus(1);
-                userPhoto.setPicUrl(result.getValue().toString());
+                userPhoto.setPicUrl(picUrl);
                 userPhoto.setCreateTime(new Date());
                 boolean flag = userPhotoBiz.save(userPhoto);
                 apiResult.setStatus(flag ? 1 : 0);
             } else {
-                apiResult.setMessage(result.getError());
+                apiResult.setMessage(ajaxResult.getError());
             }
         } else {
             user.setStatus(-1);
@@ -82,16 +91,15 @@ public class UserPhotoRestController {
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public ApiResult delete(
-            @RequestParam(value = "userPhotoId", required = true) int userPhotoId) {
+    public ApiResult delete(String photoIds) {
         ApiResult apiResult = new ApiResult();
         apiResult.setStatus(0);
         User user = CurrentUser.getInstance().getUser();
         if (user != null) {
-            boolean flag = userPhotoBiz.updateStatusByUserId(userPhotoId, CommonStatus.Deleted.getIndex(), user.getUserId());
+            boolean flag = userPhotoBiz.updateStatusByIds(photoIds.split(","), CommonStatus.Deleted.getIndex(), user.getUserId());
             apiResult.setStatus(flag ? 1 : 0);
         } else {
-            user.setStatus(-1);
+            apiResult.setStatus(-1);
         }
         return apiResult;
     }

@@ -88,7 +88,7 @@ public class UserController {
                 if (expireTime != null) {
                     jsonItem.put("expireTime", DateFormatUtils.format(expireTime, "yyyy-MM-dd"));
                 }
-                jsonItem.put("createTime", DateFormatUtils.format(user.getCreateTime(), "yyyy-MM-dd"));
+                jsonItem.put("createTime", DateFormatUtils.format(user.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
                 jsonArray.add(jsonItem);
             }
         }

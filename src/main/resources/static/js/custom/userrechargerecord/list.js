@@ -17,12 +17,12 @@ window.operateEvents = {
     'click .remove': function (e, value, row, index) {
         $confirm("提示", "确定要删除吗？", function (dlg) {
             //执行远程“删除操作”，修改状态为10
-            $.post("/userrechargerecord/delete", {"userRechargeRecordId": row.userRechargeId}, function (result) {
+            $.post("/userrecharge/delete", {"userRechargeId": row.userRechargeId}, function (result) {
                 if (result.success) {
                     //移除行
                     $table.bootstrapTable('remove', {
-                        field: 'userRechargeRecordId',
-                        values: [row.userRechargeRecordId]
+                        field: 'userRechargeId',
+                        values: [row.userRechargeId]
                     });
                     dlg.close();
                 } else {
@@ -36,7 +36,7 @@ window.operateEvents = {
 
 //初始化表格
 function initTable() {
-    var url = "/userrechargerecord/listdata",
+    var url = "/userrecharge/listdata",
         queryParams = function queryParams(params) {   //设置查询参数
             var param = {
                 pageIndex: params.pageNumber,
@@ -58,7 +58,7 @@ function initTable() {
             field: 'amount',
             title: '金额'
         }, {
-            field: 'status',
+            field: 'statusName',
             title: '状态'
         }, {
             field: 'createTime',

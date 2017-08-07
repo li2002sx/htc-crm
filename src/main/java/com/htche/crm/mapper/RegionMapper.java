@@ -8,4 +8,6 @@ import java.util.Map;
 public interface RegionMapper {
 
     List<Region> selectAllList();
+
+    List<Region> selectListByDepth(int depth);
 }

@@ -28,10 +28,20 @@ public class CarModelModel {
     }
 
     @Data
+    public static class UserCarList extends ApiResult {
+
+        private List<UserCarInfo> userCarInfos;
+    }
+
+    @Data
     public static class UserCarResult extends ApiResult {
+
+        private CarModel carModel;
 
         private UserCarInfo userCarInfo;
 
         private User user;
+
+        private List<UserPhoto> userPhotos;
     }
 }

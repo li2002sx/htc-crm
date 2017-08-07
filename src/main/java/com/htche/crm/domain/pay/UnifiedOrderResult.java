@@ -19,7 +19,7 @@ public class UnifiedOrderResult {
     /**
      * 时间戳
      */
-    private long timeStamp;
+    private String timeStamp;
 
     /**
      * 预支付交易会话标识

@@ -5,6 +5,8 @@
 
 $(function () {
 
+    $('.my-colorpicker2').colorpicker();
+
     $('#cancel').click(function () {
         history.back();
     });
@@ -12,13 +14,13 @@ $(function () {
     //图片上传
     var picUrlArr = [];
     if ($.trim($("#picUrl").val()) != "") {
-        var pic = "<img src='" + $.trim($("#realPicUrl").val()) + "' class='.file-preview' style='width:200px;height:150px;'>";
+        var pic = "<img src='" + $.trim($("#realPicUrl").val()) + "' class='.file-preview' style='width:200px;height:100px;'>";
         picUrlArr.push(pic);
-        var realPicUrl2 = $.trim($("#realPicUrl2").val());
-        if (realPicUrl2.length > 0) {
-            pic = "<img src='" + realPicUrl2 + "' class='.file-preview' style='width:200px;height:150px;'>";
-            picUrlArr.push(pic);
-        }
+        // var realPicUrl2 = $.trim($("#realPicUrl2").val());
+        // if (realPicUrl2.length > 0) {
+        //     pic = "<img src='" + realPicUrl2 + "' class='.file-preview' style='width:200px;height:150px;'>";
+        //     picUrlArr.push(pic);
+        // }
     }
     $("#picUrl_file").fileinput({
         uploadUrl: "/upload",
@@ -60,7 +62,8 @@ $(function () {
             moduleId: parseInt($('#moduleId').val()) || 0,
             title: $('#title').val().trim(),
             picUrl: $('#picUrl').val(),
-            picUrl2: $('#picUrl2').val(),
+            // picUrl2: $('#picUrl2').val(),
+            color: $('#color').val(),
             url: $('#url').val().trim(),
             orderNo: parseInt($('#orderNo').val()) || 0,
             status: 1

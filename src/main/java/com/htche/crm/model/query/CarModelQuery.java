@@ -9,11 +9,13 @@ import lombok.Data;
 @Data
 public class CarModelQuery extends PageQuery {
 
-    public Integer carModelId;
+    private Integer carModelId;
 
-    public Integer specId;
+    private Integer specId;
 
-    public Integer brandId;
+    private Integer brandId;
+
+    private Integer modelsId;
 
     public String searchKey;
 

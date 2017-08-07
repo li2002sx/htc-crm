@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.htche.crm.constants.BusinessType;
 import com.htche.crm.constants.PayStatus;
+import com.htche.crm.constants.RechargeType;
 import com.htche.crm.domain.RechargeProduct;
 import com.htche.crm.domain.UserRechargeRecord;
 import com.htche.crm.domain.pay.BusinessOrderParam;
@@ -63,6 +64,7 @@ public class UserRechargeRecordBiz {
                 businessOrderParam.setBusinessType(BusinessType.Virtual);
                 businessOrderParam.setOpenId(openId);
                 businessOrderParam.setIp(ip);
+                businessOrderParam.setRechargeType(RechargeType.Wx);
                 businessOrderParam.setRemark(String.format("%f元金额充值", AmountUtil.centToYuan(amount)));
                 businessOrderParam.setOrderNumber(orderNumber);
                 UnifiedOrderResult unifiedOrderResult = rechargeRecordBiz.unifiedOrder(businessOrderParam);

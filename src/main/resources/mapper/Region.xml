@@ -15,4 +15,13 @@
     <include refid="Base_Column_List" />
     from region order by 1 asc
   </select>
+  <select id="selectListByDepth" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from region
+    <![CDATA[
+      where depth <= #{depth,jdbcType=INTEGER}
+    ]]>
+    order by 1 asc
+  </select>
 </mapper>

@@ -25,7 +25,7 @@ window.operateEvents = {
     'click .remove': function (e, value, row, index) {
         $confirm("提示", "确定要删除吗？", function (dlg) {
             //执行远程“删除操作”，修改状态为10
-            $.post("/carinfo/delete", {"carInfoId": row.carInfoId}, function (result) {
+            $.post("/usercar/delete", {"carInfoId": row.carInfoId}, function (result) {
                 if (result.success) {
                     //移除行
                     $table.bootstrapTable('remove', {
@@ -49,7 +49,7 @@ function initTable() {
             var param = {
                 pageIndex: params.pageNumber,
                 pageSize: params.pageSize,
-                specId: parseInt($('#specId').val()) || 0
+                userId: parseInt($('#userId').val()) || 0
             };
             return param;
         },

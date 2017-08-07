@@ -1,5 +1,6 @@
 package com.htche.crm.domain.pay;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +9,7 @@ import java.io.Serializable;
 /**
  * Created by jankie on 2016/11/3.
  */
-@Getter
-@Setter
+@Data
 public class WxAccessTokenResult implements Serializable {
 
     private String access_token;

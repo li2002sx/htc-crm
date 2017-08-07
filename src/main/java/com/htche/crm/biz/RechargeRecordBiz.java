@@ -77,9 +77,10 @@ public class RechargeRecordBiz {
             rechargeRecord.setBusinessType(orderParam.getBusinessType().getIndex());
             rechargeRecord.setCreateTime(new Date());
             rechargeRecord.setStatus(PayStatus.Init.getIndex());
-            int rechargeId = rechargeRecordMapper.insertSelective(rechargeRecord);
-            rechargeRecord.setRechargeId(rechargeId);
-
+            int effectCount = rechargeRecordMapper.insertSelective(rechargeRecord);
+            if (effectCount == 0) {
+                throw new RuntimeException("插入充值流水失败");
+            }
         } else if (rechargeRecord.getStatus() == PayStatus.Success.getIndex()) {
             throw new RuntimeException("该订单已经支付成功，请不要重复支付");
         }
@@ -128,13 +129,27 @@ public class RechargeRecordBiz {
                     map.put("payId", prepayId);
                     int effectCount = rechargeRecordMapper.updatePayIdByRechargeId(map);
                     if (effectCount > 0) {
+
+                        Map<String,String> unifiedMap = new HashMap<>();
+
+                        unifiedMap.put("appId", resp.get("appid"));
+                        unifiedMap.put("timeStamp", Long.toString(new Date().getTime() / 1000L));
+                        unifiedMap.put("nonceStr", resp.get("nonce_str"));
+                        unifiedMap.put("package", "prepay_id=" + prepayId);
+                        unifiedMap.put("signType", "MD5");
+
+                        String sign = WXPayUtil.generateSignature(unifiedMap,WeixinUtil._AppKeyPub);
+
                         unifiedOrderResult = new UnifiedOrderResult();
-                        unifiedOrderResult.setAppId(resp.get("appid"));
-                        unifiedOrderResult.setTimeStamp(new Date().getTime() / 1000L);
-                        unifiedOrderResult.setNonceStr(resp.get("nonce_str"));
+                        unifiedOrderResult.setAppId(unifiedMap.get("appId"));
+                        unifiedOrderResult.setTimeStamp(unifiedMap.get("timeStamp"));
+                        unifiedOrderResult.setNonceStr(unifiedMap.get("nonceStr"));
                         unifiedOrderResult.setPrepayId(prepayId);
                         unifiedOrderResult.setSignType("MD5");
-                        unifiedOrderResult.setSign(resp.get("sign"));
+                        unifiedOrderResult.setSign(sign);
+
+                        logger.info("unified-result:{}", JSON.toJSONString(unifiedOrderResult));
+
                     } else {
                         throw new RuntimeException("更新微信支付订单失败");
                     }

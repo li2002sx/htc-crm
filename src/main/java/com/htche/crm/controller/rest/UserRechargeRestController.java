@@ -2,6 +2,7 @@ package com.htche.crm.controller.rest;
 
 import com.htche.crm.biz.RechargeProductBiz;
 import com.htche.crm.biz.RechargeRecordBiz;
+import com.htche.crm.biz.UserBiz;
 import com.htche.crm.biz.UserRechargeRecordBiz;
 import com.htche.crm.domain.RechargeProduct;
 import com.htche.crm.domain.User;
@@ -11,6 +12,7 @@ import com.htche.crm.model.ApiResult;
 import com.htche.crm.model.rest.UserRechargeModel;
 import com.htche.crm.util.CurrentUser;
 import com.htche.crm.util.HttpUtil;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sun.net.www.http.HttpClient;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,19 +44,34 @@ public class UserRechargeRestController {
     @Autowired
     RechargeRecordBiz rechargeRecordBiz;
 
+    @Autowired
+    UserBiz userBiz;
+
     @RequestMapping(value = "products", method = RequestMethod.GET)
     public UserRechargeModel.RechargeProductList getRechargeProductList() {
         UserRechargeModel.RechargeProductList rechargeProductList = new UserRechargeModel.RechargeProductList();
-        rechargeProductList.setStatus(1);
-        List<RechargeProduct> rechargeProducts = rechargeProductBiz.selectAllList();
-        rechargeProductList.setRechargeProductList(rechargeProducts);
+        rechargeProductList.setStatus(0);
+        User user = CurrentUser.getInstance().getUser();
+        if (user != null) {
+            List<RechargeProduct> rechargeProducts = rechargeProductBiz.selectAllList();
+            rechargeProductList.setRechargeProductList(rechargeProducts);
+
+            rechargeProductList.setExpireTime("");
+            user = userBiz.selectByPrimaryKey(user.getUserId());
+            if (user.isVip()) {
+                rechargeProductList.setExpireTime(DateFormatUtils.format(user.getExpireTime(), "yyyy-MM-dd"));
+            }
+            rechargeProductList.setStatus(1);
+        } else {
+            rechargeProductList.setStatus(-1);
+        }
         return rechargeProductList;
     }
 
-    @RequestMapping(value = "userrecharge", method = RequestMethod.GET)
+    @RequestMapping(value = "recharge", method = RequestMethod.POST)
     public UserRechargeModel.UseRechargeResult userRecharge(
             @RequestParam(value = "productId", required = true) int productId,
-            @RequestParam(value = "openId", required = false) String openId) {
+            @RequestParam(value = "openId", required = true) String openId) {
         UserRechargeModel.UseRechargeResult useRechargeResult = new UserRechargeModel.UseRechargeResult();
         useRechargeResult.setStatus(0);
         CurrentUser currentUser = CurrentUser.getInstance();

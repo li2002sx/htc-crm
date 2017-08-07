@@ -45,4 +45,16 @@ public class CarModel {
      * 创建时间
      */
     private Date createTime;
+
+    //扩展字段
+    /**
+     * 规格名称
+     */
+    private String specName;
+
+    /**
+     * 车型名称
+     */
+    private String modelsName;
+
 }

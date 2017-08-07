@@ -64,7 +64,7 @@ $.AdminLTE.options = {
   //before AdminLTE's app.js
   enableFastclick: false,
   //Control Sidebar Tree views
-  enableControlTreeView: true, //控制菜单使用
+  enableControlTreeView: false, //控制菜单使用
   //Control Sidebar Options
   enableControlSidebar: true,
   controlSidebarOptions: {

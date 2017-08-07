@@ -9,4 +9,5 @@ import lombok.Data;
 @Data
 public class UserCarInfoQuery extends PageQuery {
 
+    private Integer userId;
 }

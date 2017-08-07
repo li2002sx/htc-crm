@@ -79,10 +79,10 @@ public class CarModuleInfoController {
             String picUrl = carModuleInfo.getPicUrl();
             model.addObject("picUrl", picUrl);
             model.addObject("realPicUrl", ImageUtil.getRealPicUrl(picUrl, false));
-
-            String picUrl2 = carModuleInfo.getPicUrl2();
-            model.addObject("picUrl2", picUrl2);
-            model.addObject("realPicUrl2", ImageUtil.getRealPicUrl(picUrl2, false));
+            model.addObject("color", carModuleInfo.getColor());
+//            String picUrl2 = carModuleInfo.getPicUrl2();
+//            model.addObject("picUrl2", picUrl2);
+//            model.addObject("realPicUrl2", ImageUtil.getRealPicUrl(picUrl2, false));
         }
         model.addObject("carModuleInfo", carModuleInfo);
         model.addObject("carModelId", modelid);

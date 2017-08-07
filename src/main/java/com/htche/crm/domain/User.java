@@ -2,6 +2,8 @@ package com.htche.crm.domain;
 
 import com.htche.crm.constants.SexType;
 import lombok.Data;
+import org.apache.commons.lang3.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.util.Date;
 
@@ -117,4 +119,16 @@ public class User {
      * 城市ID
      */
     private String cityName;
+
+    /**
+     * 是否是VIP
+     *
+     * @return
+     */
+    public boolean isVip() {
+        if (this.expireTime != null && this.expireTime.getTime() > new Date().getTime()) {
+            return true;
+        }
+        return false;
+    }
 }

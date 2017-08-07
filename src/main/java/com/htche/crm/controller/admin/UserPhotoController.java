@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,23 +37,10 @@ public class UserPhotoController {
 
 
     @RequestMapping(value = "list")
-    public ModelAndView list() {
+    public ModelAndView list(@RequestParam(value = "userid", required = false) Integer userid) {
         ModelAndView model = new ViewResult("custom/userphoto/list");
+        model.addObject("userId", userid);
         return model;
-    }
-
-    @RequestMapping(value = "save", method = RequestMethod.POST)
-    @ResponseBody
-    public AjaxResult save(UserPhoto user) {
-        AjaxResult ajaxResult = new AjaxResult();
-        if (user.getPhotoId() == 0) {
-//            AdminUserPhoto adminUserPhoto = CurrentUserPhoto.getInstance().getUserPhoto();
-//            user.setCarDealerId(adminUserPhoto.getRoleId());
-            user.setCreateTime(new Date());
-        }
-        boolean flag = userPhotoBiz.save(user);
-        ajaxResult.setSuccess(flag);
-        return ajaxResult;
     }
 
     /**

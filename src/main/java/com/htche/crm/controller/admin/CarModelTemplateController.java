@@ -118,7 +118,6 @@ public class CarModelTemplateController {
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonItem = null;
 
-
         Page<CarModelTemplate> carModelTemplatePage = carModelTemplateBiz.selectAllList(query);
         //封装前台数据
         if (carModelTemplatePage != null && carModelTemplatePage.getResult() != null) {

@@ -39,6 +39,7 @@ public class UserCarInfoBiz {
 
     /**
      * 列表
+     *
      * @return
      */
     public Page<UserCarInfo> selectAllList(UserCarInfoQuery query) {
@@ -59,7 +60,11 @@ public class UserCarInfoBiz {
         return userCarInfoMapper.updateStatus(map) > 0;
     }
 
-    public UserCarInfo selectByCarModelId(int userCarInfoId) {
-        return userCarInfoMapper.selectByCarModelId(userCarInfoId);
+    public boolean updateStatusByIds(String[] userCarInfoIds, int status, int userId) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("userCarInfoIds", userCarInfoIds);
+        map.put("status", status);
+        map.put("userId", userId);
+        return userCarInfoMapper.updateStatusByIds(map) > 0;
     }
 }

@@ -15,12 +15,34 @@ public class UserModel {
     @Data
     public static class UserInfo extends ApiResult {
 
-        public User user;
+        private User user;
     }
 
     @Data
     public static class UserPhotoList extends ApiResult {
 
-        public List<UserPhoto> userPhotos;
+        private List<UserPhoto> userPhotos;
+    }
+
+    @Data
+    public static class WxAuthInfo extends ApiResult {
+
+        private String wxAuthInfo;
+    }
+
+    @Data
+    public static class WeixinJSConfig {
+
+        //应用ID
+        private String appId;
+
+        //随机字符串
+        private String nonceStr;
+
+        //时间戳
+        private String timestamp;
+
+        //签名
+        private String signature;
     }
 }

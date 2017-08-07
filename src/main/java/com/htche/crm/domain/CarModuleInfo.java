@@ -25,9 +25,9 @@ public class CarModuleInfo {
     private String picUrl;
 
     /**
-     * 配图2
+     * 颜色
      */
-    private String picUrl2;
+    private String color;
 
     /**
      * 连接地址

@@ -5,12 +5,16 @@
     <id column="user_car_info_id" property="userCarInfoId" jdbcType="INTEGER" />
     <result column="car_model_id" property="carModelId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
     <result column="configure" property="configure" jdbcType="VARCHAR" />
     <result column="frame" property="frame" jdbcType="VARCHAR" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+
+    <!--车型信息-->
+    <association property="carModel" javaType="com.htche.crm.domain.CarModel"
+                 resultMap="com.htche.crm.mapper.CarModelMapper.BaseResultMap"/>
   </resultMap>
   <sql id="Base_Column_List" >
     user_car_info_id, car_model_id, user_id, price, configure, frame, remark, status, create_time
@@ -63,7 +67,7 @@
         #{userId,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
-        #{price,jdbcType=VARCHAR},
+        #{price,jdbcType=DECIMAL},
       </if>
       <if test="configure != null" >
         #{configure,jdbcType=VARCHAR},
@@ -89,7 +93,7 @@
         car_model_id = #{carModelId,jdbcType=INTEGER},
       </if>
       <if test="price != null" >
-        price = #{price,jdbcType=VARCHAR},
+        price = #{price,jdbcType=DECIMAL},
       </if>
       <if test="configure != null" >
         configure = #{configure,jdbcType=VARCHAR},
@@ -118,9 +122,10 @@
   </select>
   <select id="selectAllList" parameterType="map" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
-    from user_car_info
-    where status = 1
+    info.*,model.*
+    from user_car_info info
+    join car_model model on info.car_model_id = model.car_model_id
+    where info.status = 1
     <if test="userId != null">
       and user_id = #{userId,jdbcType=INTEGER}
     </if>
@@ -130,5 +135,14 @@
     UPDATE user_car_info SET
     status = #{status,jdbcType=INTEGER}
     where user_car_info_id = #{userCarInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatusByIds" parameterType="map">
+    UPDATE user_car_info SET
+    status = #{status,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+    and user_car_info_id IN
+    <foreach item="item" index="index" collection="userCarInfoIds" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </update>
 </mapper>

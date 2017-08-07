@@ -10,6 +10,7 @@ import com.htche.crm.domain.AdminUser;
 import com.htche.crm.domain.UserRechargeRecord;
 import com.htche.crm.model.AjaxResult;
 import com.htche.crm.model.query.UserRechargeRecordQuery;
+import com.htche.crm.util.AmountUtil;
 import com.htche.crm.util.CurrentUser;
 import com.htche.crm.util.ViewResult;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,24 +39,13 @@ public class UserRechargeRecordController {
     UserRechargeRecordBiz userRechargeRecordBiz;
 
     @RequestMapping(value = "list")
-    public ModelAndView list() {
+    public ModelAndView list(
+            @RequestParam(value = "userid", required = false) Integer userid) {
         ModelAndView model = new ViewResult("custom/userrechargerecord/list");
+        model.addObject("userId", userid);
         return model;
     }
 
-//    @RequestMapping(value = "save", method = RequestMethod.POST)
-//    @ResponseBody
-//    public AjaxResult save(UserRechargeRecord userRechargeRecord) {
-//        AjaxResult ajaxResult = new AjaxResult();
-//        if (userRechargeRecord.getUserRechargeRecordId() == 0) {
-//            AdminUser adminUser = CurrentUser.getInstance().getUser();
-//            userRechargeRecord.setCarDealerId(adminUser.getRoleId());
-//            userRechargeRecord.setCreateTime(new Date());
-//        }
-//        boolean flag = userRechargeRecordBiz.save(userRechargeRecord);
-//        ajaxResult.setSuccess(flag);
-//        return ajaxResult;
-//    }
 
     /**
      * 获取新闻数据，用于异步加载
@@ -76,10 +67,10 @@ public class UserRechargeRecordController {
         if (userRechargeRecordPage != null && userRechargeRecordPage.getResult() != null) {
             for (UserRechargeRecord userRechargeRecord : userRechargeRecordPage.getResult()) {
                 jsonItem = new JSONObject();
-                jsonItem.put("userRechargeRecordId", userRechargeRecord.getUserRechargeId());
+                jsonItem.put("userRechargeId", userRechargeRecord.getUserRechargeId());
                 jsonItem.put("userId", userRechargeRecord.getUserId());
                 jsonItem.put("orderNumber", userRechargeRecord.getOrderNumber());
-                jsonItem.put("amount", userRechargeRecord.getAmount());
+                jsonItem.put("amount", AmountUtil.centToYuan(userRechargeRecord.getAmount()));
                 jsonItem.put("statusName", PayStatus.getName(userRechargeRecord.getStatus()));
                 jsonItem.put("createTime", DateFormatUtils.format(userRechargeRecord.getCreateTime(), "yyyy-MM-dd HH:mm:ss"));
                 Date finishTime = userRechargeRecord.getFinishTime();
@@ -92,14 +83,5 @@ public class UserRechargeRecordController {
         jsonObject.put("total", userRechargeRecordPage.getTotal());
         jsonObject.put("rows", jsonArray);
         return jsonObject;
-    }
-
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
-    @ResponseBody
-    public AjaxResult delete(int userRechargeRecordId) {
-        AjaxResult ajaxResult = new AjaxResult();
-        boolean flag = userRechargeRecordBiz.updateStatus(userRechargeRecordId, CommonStatus.Deleted.getIndex());
-        ajaxResult.setSuccess(flag);
-        return ajaxResult;
     }
 }

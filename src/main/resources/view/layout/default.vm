@@ -106,28 +106,28 @@
                         <i class="fa fa-dashboard"></i> <span>首页</span>
                     </a>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-edit"></i> <span>添加</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu menu-open">
-                        #if($!identity.roleId == 0)
-                            <li><a href="/cartree/list"><i class="fa fa-circle-o"></i> 品牌管理</a></li>
-                            <li><a href="/cardealer/edit/0"><i class="fa fa-circle-o"></i> 添加车商</a></li>
-                            <li><a href="/contact/edit/0"><i class="fa fa-circle-o"></i> 添加通讯录</a></li>
-                            <li><a href="/carinfo/edit/0"><i class="fa fa-circle-o"></i> 添加进口车价格指数</a></li>
-                        #end
-                        #if($!identity.roleId > 0)
-                            <li><a href="/carowner/edit/0"><i class="fa fa-circle-o"></i> 添加车主</a></li>
-                            <li><a href="/allydealer/edit/0"><i class="fa fa-circle-o"></i> 添加盟商</a></li>
-                        #end
-                        <li><a href="/notice/edit/0"><i class="fa fa-circle-o"></i> 添加公告</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
+##                <li class="treeview">
+##                    <a href="#">
+##                        <i class="fa fa-edit"></i> <span>添加</span>
+##                        <span class="pull-right-container">
+##                            <i class="fa fa-angle-left pull-right"></i>
+##                        </span>
+##                    </a>
+##                    <ul class="treeview-menu menu-open">
+##                        #if($!identity.roleId == 0)
+##                            <li><a href="/cartree/list"><i class="fa fa-circle-o"></i> 品牌管理</a></li>
+##                            <li><a href="/cardealer/edit/0"><i class="fa fa-circle-o"></i> 添加车商</a></li>
+##                            <li><a href="/contact/edit/0"><i class="fa fa-circle-o"></i> 添加通讯录</a></li>
+##                            <li><a href="/carinfo/edit/0"><i class="fa fa-circle-o"></i> 添加进口车价格指数</a></li>
+##                        #end
+##                        #if($!identity.roleId > 0)
+##                            <li><a href="/carowner/edit/0"><i class="fa fa-circle-o"></i> 添加车主</a></li>
+##                            <li><a href="/allydealer/edit/0"><i class="fa fa-circle-o"></i> 添加盟商</a></li>
+##                        #end
+##                        <li><a href="/notice/edit/0"><i class="fa fa-circle-o"></i> 添加公告</a></li>
+##                    </ul>
+##                </li>
+                <li class="treeview active">
                     <a href="#">
                         <i class="fa fa-envelope"></i> <span>管理</span>
                         <span class="pull-right-container">
@@ -136,6 +136,7 @@
                     </a>
                     <ul class="treeview-menu menu-open">
                         #if($!identity.roleId == 0)
+                            <li><a href="/cartree/list"><i class="fa fa-circle-o"></i> 品牌管理</a></li>
                             <li><a href="/cardealer/list"><i class="fa fa-circle-o"></i> 车商管理</a></li>
                             <li><a href="/contact/list"><i class="fa fa-circle-o"></i> 通讯录管理</a></li>
                             <li><a href="/carinfo/list"><i class="fa fa-circle-o"></i> 进口车价格指数管理</a></li>
@@ -161,9 +162,9 @@
                     </li>
                 #end
                 #if($!identity.roleId == 0)
-                    <li class="treeview">
+                    <li class="treeview active">
                         <a href="#">
-                            <i class="fa fa-th"></i> <span>车源分享</span>
+                            <i class="fa fa-car"></i> <span>车源分享</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
@@ -176,7 +177,7 @@
                             <li><a href="/userrecharge/list"><i class="fa fa-circle-o"></i> 充值管理</a></li>
                         </ul>
                     </li>
-                    <li class="treeview">
+                    <li class="treeview active">
                         <a href="#">
                             <i class="fa fa-th"></i> <span>系统管理</span>
                             <span class="pull-right-container">

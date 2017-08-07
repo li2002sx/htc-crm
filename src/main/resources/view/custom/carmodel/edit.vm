@@ -65,7 +65,7 @@
                                 <input id="picUrl_file" name="file" type="file">
                                 <input type="hidden" id="picUrl" name="picUrl" value="$!picUrl">
                                 <input type="hidden" id="realPicUrl" value="$!realPicUrl">
-                                <span class="help-block">图片大小:宽:高=4:3</span>
+                                <span class="help-block">图片大小:宽:高=2:1</span>
                             </div>
                         </div>
                     </div>

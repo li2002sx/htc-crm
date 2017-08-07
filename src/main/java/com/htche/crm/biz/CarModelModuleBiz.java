@@ -37,6 +37,19 @@ public class CarModelModuleBiz {
         return effectCount > 0;
     }
 
+    public void batchInsertModules(String[] titles, int carModelId) {
+        for (int i = 0; i < titles.length; i++) {
+            CarModelModule module = new CarModelModule();
+            module.setModuleId(0);
+            module.setCarModelId(carModelId);
+            module.setTitle(titles[i]);
+            module.setFontSize(30);
+            module.setOrderNo(i + 1);
+            module.setStatus(1);
+            carModelModuleMapper.insertSelective(module);
+        }
+    }
+
     /**
      * 列表
      *
@@ -46,6 +59,7 @@ public class CarModelModuleBiz {
         Page<CarModelModule> carModelModulePage = PageHelper.startPage(query.getPageIndex(), query.getPageSize());
         Map<String, Object> map = new HashMap<>();
         map.put("carModelId", query.getCarModelId());
+        map.put("moduleIds", query.getModuleIds());
         List<CarModelModule> carModelModules = carModelModuleMapper.selectAllList(map);
         return carModelModulePage;
     }

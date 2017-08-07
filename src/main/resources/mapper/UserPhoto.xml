@@ -77,7 +77,7 @@
     <include refid="Base_Column_List" />
     from user_photo
     where status = 1
-    <if test="userId != null">
+    <if test="userId != null and userId > 0">
       and user_id = #{userId,jdbcType=INTEGER}
     </if>
     order by 1 desc
@@ -87,10 +87,21 @@
     status = #{status,jdbcType=INTEGER}
     where user_photo_id = #{userPhotoId,jdbcType=INTEGER}
   </update>
-  <update id="updateStatusByUserId" parameterType="map">
+  <update id="updateStatusByIds" parameterType="map">
     UPDATE user_photo SET
     status = #{status,jdbcType=INTEGER}
-    where user_photo_id = #{userPhotoId,jdbcType=INTEGER}
-    and user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+    and photo_id IN
+    <foreach item="item" index="index" collection="userPhotoIds" open="(" separator="," close=")">
+      #{item}
+    </foreach>
   </update>
+  <select id="selectTopNList" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_photo
+    where status = 1
+    and user_id = #{userId,jdbcType=INTEGER}
+    order by 1 desc limit #{top,jdbcType=INTEGER}
+  </select>
 </mapper>

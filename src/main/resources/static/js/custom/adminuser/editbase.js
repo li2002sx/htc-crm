@@ -48,7 +48,14 @@ $(function () {
         showRemove: false,//
         showCaption: false,//是否显示标题
         previewFileIcon: '==i class="fa fa-file">==/i>',
-        initialPreview: picUrlArr
+        initialPreview: picUrlArr,
+        uploadExtraData: function (previewId, index) {   //额外参数的关键点
+            var obj = {
+                cate: 'admin',
+                subCate: 'user'
+            };
+            return obj;
+        }
     }).on("fileuploaded", function (event, data, previewId, index) {
         var result = data.response;
         if (result.success) {

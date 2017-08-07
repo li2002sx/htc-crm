@@ -62,7 +62,7 @@ public class CurrentUser {
     private UserBiz getUserBiz() {
         if (userBiz == null) {
             logger.info("UserFacade is null, try to load it from IoC");
-            userBiz = (UserBiz) SpringContextUtil.getBean("userFacade");
+            userBiz = (UserBiz) SpringContextUtil.getBean("userBiz");
 
             if (userBiz == null) {
                 logger.info("can't load UserFacade instance from IoC, so try to create remote proxy");
@@ -83,7 +83,7 @@ public class CurrentUser {
             //使用request对象的getSession()获取session，如果session不存在则创建一个
             HttpSession session = this.getRequest().getSession();
             if (session.getAttribute(token) == null) {
-                user = userBiz.selectByToken(token);
+                user = this.getUserBiz().selectByToken(token);
                 if (user != null) {
                     if (user.getStatus() == CommonStatus.Normal.getIndex()) {
                         session.setAttribute(token, user);

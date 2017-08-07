@@ -19,4 +19,6 @@ public interface UserCarInfoMapper {
     int updateStatus(Map map);
 
     UserCarInfo selectByCarModelId(Integer carModelId);
+
+    int updateStatusByIds(Map map);
 }

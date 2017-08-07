@@ -2,6 +2,7 @@ package com.htche.crm.domain;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -24,7 +25,7 @@ public class UserCarInfo {
     /**
      * 价格
      */
-    private String price;
+    private BigDecimal price;
 
     /**
      * 配置信息
@@ -50,4 +51,9 @@ public class UserCarInfo {
      * 创建时间
      */
     private Date createTime;
+
+    /**
+     * 车源信息
+     */
+    private CarModel carModel;
 }

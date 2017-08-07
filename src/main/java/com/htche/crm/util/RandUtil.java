@@ -30,7 +30,9 @@ public class RandUtil {
 
     public static final String getUUID() {
         UUID uuid = UUID.randomUUID();
-        return  uuid.toString();
+        String str = uuid.toString();
+        String temp = str.substring(0, 8) + str.substring(9, 13) + str.substring(14, 18) + str.substring(19, 23) + str.substring(24);
+        return temp;
     }
     /**
      * 根据业务类型生成订单号

@@ -98,7 +98,7 @@
     from car_model_template
     where status = 1
     and car_model_id = #{carModelId,jdbcType=INTEGER}
-    order by acquiesce DESC ,1 DESC limit 1
+    order by acquiesce DESC ,1 DESC
   </select>
   <update id="updateStatus" parameterType="map">
     UPDATE car_model_template SET

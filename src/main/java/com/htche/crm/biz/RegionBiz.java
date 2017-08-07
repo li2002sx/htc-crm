@@ -88,4 +88,8 @@ public class RegionBiz {
         });
         return map;
     }
+
+    public List<Region> selectListByDepth(int depth) {
+        return regionMapper.selectListByDepth(depth);
+    }
 }

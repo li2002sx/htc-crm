@@ -18,6 +18,8 @@ public class UserRechargeModel {
     public static class RechargeProductList extends ApiResult {
 
         public List<RechargeProduct> rechargeProductList;
+
+        public String expireTime;
     }
 
     @Data

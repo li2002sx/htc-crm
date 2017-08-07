@@ -3,6 +3,7 @@ package com.htche.crm.controller.rest;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
+import com.github.wxpay.sdk.WXPayUtil;
 import com.htche.crm.biz.CategoryBiz;
 import com.htche.crm.biz.RegionBiz;
 import com.htche.crm.biz.UserBiz;
@@ -16,9 +17,10 @@ import com.htche.crm.model.ApiResult;
 import com.htche.crm.model.query.UserQuery;
 import com.htche.crm.model.rest.CarModelModel;
 import com.htche.crm.model.rest.UserModel;
-import com.htche.crm.util.CurrentUser;
-import com.htche.crm.util.ImageUtil;
-import com.htche.crm.util.ViewResult;
+import com.htche.crm.util.*;
+import com.htche.crm.util.pay.WeixinPayConfig;
+import com.htche.crm.util.pay.WeixinUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -96,10 +99,22 @@ public class UserRestController {
     @RequestMapping(value = "save", method = RequestMethod.POST)
     public ApiResult save(User userInfo) {
         ApiResult apiResult = new ApiResult();
+        String userPic = userInfo.getUserPic();
+        if (userPic.startsWith("data:image")) {
+            AjaxResult ajaxResult = ImageUtil.saveBase64ToPic(userPic, "user", "avatar");
+            if (ajaxResult.isSuccess()) {
+                userPic = ajaxResult.getValue().toString();
+            } else {
+                userPic = null;
+            }
+        } else {
+            userPic = null;
+        }
         apiResult.setStatus(0);
         User user = CurrentUser.getInstance().getUser();
         if (user != null) {
             userInfo.setUserId(user.getUserId());
+            userInfo.setUserPic(userPic);
             int effectCount = userBiz.updateInfoByUserId(userInfo);
             apiResult.setStatus(effectCount);
         } else {
@@ -114,6 +129,7 @@ public class UserRestController {
         userInfo.setStatus(0);
         User user = CurrentUser.getInstance().getUser();
         if (user != null) {
+            user = userBiz.selectByPrimaryKey(user.getUserId());
             user.setUserPic(ImageUtil.getRealPicUrl(user.getUserPic(), false));
             Map<Integer, String> categoryMap = categoryBiz.getCategoryMap(0);
             Map<Integer, String> regionMap = regionBiz.getRegionMap();
@@ -127,5 +143,71 @@ public class UserRestController {
             userInfo.setStatus(-1);
         }
         return userInfo;
+    }
+
+    @RequestMapping(value = "vip", method = RequestMethod.GET)
+    public ApiResult vip() {
+        ApiResult apiResult = new ApiResult();
+        apiResult.setStatus(0);
+        User user = CurrentUser.getInstance().getUser();
+        if (user != null) {
+            user = userBiz.selectByPrimaryKey(user.getUserId());
+            Date expireTime = user.getExpireTime();
+            if (expireTime == null) {
+                apiResult.setMessage("您还没有开通VIP会员");
+            } else if (expireTime.getTime() < new Date().getTime()) {
+                apiResult.setMessage("您的VIP会员已经过期");
+            } else {
+                apiResult.setStatus(1);
+            }
+        } else {
+            apiResult.setStatus(-1);
+        }
+        return apiResult;
+    }
+
+    /**
+     * 如果微信打开直接获取微信OPENID,用于支付
+     *
+     * @return
+     */
+    @RequestMapping(value = "wxauth", method = RequestMethod.GET)
+    public UserModel.WxAuthInfo getWxAuthInfo(String code) {
+        UserModel.WxAuthInfo wxAuthInfo = new UserModel.WxAuthInfo();
+        wxAuthInfo.setStatus(0);
+        if (StringUtils.isNotEmpty(code)) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(WeixinUtil._WxAuthAccessTokenUrl + "?grant_type=authorization_code");
+            sb.append("&appid=" + WeixinUtil._AppIdPub);
+            sb.append("&secret=" + WeixinUtil._AppSecretPub);
+            sb.append("&code=" + code);
+
+            String json = HttpUtil.get(sb.toString());
+            wxAuthInfo.setWxAuthInfo(json);
+            wxAuthInfo.setStatus(1);
+        }
+        return wxAuthInfo;
+    }
+
+    @RequestMapping(value = "wxshareconf", method = RequestMethod.GET)
+    public UserModel.WeixinJSConfig weixinJSConfig(
+            @RequestParam(value = "url", required = true) String url) {
+        String jsTicket = WeixinUtil.getWxJSTicket();
+
+        Map<String, Object> map = new HashMap<>();
+        String rndStr = RandUtil.stringId(10);
+        long utmMill = new Date().getTime() / 1000L;
+        map.put("noncestr", rndStr);
+        map.put("jsapi_ticket", jsTicket);
+        map.put("timestamp", utmMill);
+        map.put("url", url);
+
+        String sign = WeixinUtil.wxShareSign(map);
+        UserModel.WeixinJSConfig weixinJSConfig = new UserModel.WeixinJSConfig();
+        weixinJSConfig.setAppId(WeixinUtil._AppIdPub);
+        weixinJSConfig.setNonceStr(rndStr);
+        weixinJSConfig.setTimestamp(String.valueOf(utmMill));
+        weixinJSConfig.setSignature(sign);
+        return weixinJSConfig;
     }
 }

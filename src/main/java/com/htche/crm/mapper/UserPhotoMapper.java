@@ -17,5 +17,7 @@ public interface UserPhotoMapper {
 
     int updateStatus(Map map);
 
-    int updateStatusByUserId(Map map);
+    int updateStatusByIds(Map map);
+
+    List<UserPhoto> selectTopNList(Map map);
 }

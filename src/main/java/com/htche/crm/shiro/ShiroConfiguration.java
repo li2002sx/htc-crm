@@ -99,6 +99,12 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/smstemplate/**", "roles[admin]");
         filterChainDefinitionMap.put("/contract/**", "roles[admin]");
 
+        filterChainDefinitionMap.put("/carmodel/**", "roles[admin]");
+        filterChainDefinitionMap.put("/user/**", "roles[admin]");
+        filterChainDefinitionMap.put("/usercar/**", "roles[admin]");
+        filterChainDefinitionMap.put("/userphoto/**", "roles[admin]");
+        filterChainDefinitionMap.put("/userrecharge/**", "roles[admin]");
+
         filterChainDefinitionMap.put("/rest/**", "anon");
         // authc：该过滤器下的页面必须验证后才能访问，它是Shiro内置的一个拦截器org.apache.shiro.web.filter.authc.FormAuthenticationFilter
         filterChainDefinitionMap.put("/**", "authc");// 这里为了测试，只限制/user，实际开发中请修改为具体拦截的请求规则

@@ -61,11 +61,18 @@ public class UserPhotoBiz {
         return userPhotoMapper.updateStatus(map) > 0;
     }
 
-    public boolean updateStatusByUserId(int userPhotoId, int status, int userId) {
+    public boolean updateStatusByIds(String[] userPhotoIds, int status, int userId) {
         Map<String, Object> map = new HashMap<>();
-        map.put("userPhotoId", userPhotoId);
+        map.put("userPhotoIds", userPhotoIds);
         map.put("status", status);
         map.put("userId", userId);
-        return userPhotoMapper.updateStatusByUserId(map) > 0;
+        return userPhotoMapper.updateStatusByIds(map) > 0;
+    }
+
+    public List<UserPhoto> selectTopNList(int userId, int top) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("top", top);
+        map.put("userId", userId);
+        return userPhotoMapper.selectTopNList(map);
     }
 }

@@ -76,6 +76,9 @@ function initTable() {
             field: 'title',
             title: '标题'
         }, {
+            field: 'color',
+            title: '颜色'
+        }, {
             field: 'picUrl',
             title: '配图',
             formatter: function (value, row, index) {

@@ -44,10 +44,10 @@ public class GlobalExceptionHandler {
         return handleLog(request, ex);
     }
 
-//    @ExceptionHandler(Exception.class)
-//    public ApiResult handleException(HttpServletRequest request, Exception ex) {
-//        return handleLog(request, ex);
-//    }
+    @ExceptionHandler(Exception.class)
+    public ApiResult handleException(HttpServletRequest request, Exception ex) {
+        return handleLog(request, ex);
+    }
 
     @ExceptionHandler(SystemException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
