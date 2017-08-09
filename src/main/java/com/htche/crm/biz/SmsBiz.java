@@ -88,8 +88,8 @@ public class SmsBiz {
         return smses;
     }
 
-    private final static String _AppId = "cf_mtgg";
-    private final static String _AppKey = "d551472451952c45d8d06e8350ac802d";
+    private final static String _AppId = "C24347493";
+    private final static String _AppKey = "1103ef91dc10c2aec21a659d0f507386";
 
     //    @Scheduled(cron = "0/20 * *  * * ? ")
     @Scheduled(cron = "0 0 8,9,10,11 * * ?")
@@ -233,7 +233,7 @@ public class SmsBiz {
                 }
                 if (canSend) {
                     String msgCode = RandUtil.stringId(4);
-                    String content = String.format("您的验证码是:%s，值得您信赖的车源平台", msgCode);
+                    String content = String.format("您的验证码是:%s，全球车源共分享！", msgCode);
                     SmsHuyiResult result = SmsHuyiUtil.sendSms(mobile, content, _AppId, _AppKey);
                     if (result != null) {
                         String code = result.getCode();

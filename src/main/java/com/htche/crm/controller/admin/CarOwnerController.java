@@ -44,8 +44,9 @@ public class CarOwnerController {
     RegionBiz regionBiz;
 
     @RequestMapping(value = "list")
-    public ModelAndView list() {
+    public ModelAndView list(int month) {
         ModelAndView model = new ViewResult("custom/carowner/list");
+        model.addObject("month", month);
         return model;
     }
 
@@ -93,7 +94,7 @@ public class CarOwnerController {
 
         AdminUser adminUser = CurrentUser.getInstance().getAdminUser();
 
-        Page<CarOwner> carOwnerPage = carOwnerBiz.selectAllList(adminUser.getRoleId(), query.getName(), query.getPageIndex(), query.getPageSize());
+        Page<CarOwner> carOwnerPage = carOwnerBiz.selectAllList(adminUser.getRoleId(), query);
         //封装前台数据
         if (carOwnerPage != null && carOwnerPage.getResult() != null) {
             for (CarOwner carOwner : carOwnerPage.getResult()) {
@@ -105,6 +106,7 @@ public class CarOwnerController {
                 jsonItem.put("phone", carOwner.getPhone());
                 jsonItem.put("address", carOwner.getAddress());
                 jsonItem.put("cardNo", carOwner.getCardNo());
+                jsonItem.put("birthday", DateFormatUtils.format(carOwner.getBirthday(), "yyyy-MM-dd"));
 
                 Date buyTime = carOwner.getBuyTime();
                 if (buyTime != null) {

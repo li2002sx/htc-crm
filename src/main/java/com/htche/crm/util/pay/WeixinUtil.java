@@ -22,11 +22,11 @@ public class WeixinUtil {
     protected static final Logger logger = LoggerFactory.getLogger(WeixinUtil.class);
 
     //公众号相关参数，appid,appsecret,appkey,merchantid
-    public static final String _AppIdPub = "wxf0263f5d7f90b3ba";
-    public static final String _AppSecretPub = "07f6ba2ad1578f6e826e8c732e262afb";
-    public static final String _AppKeyPub = "7dbd5e4058a20dfde60fc150bfd7ea81";
-    public static final String _MerchantIdPub = "1391875302";
-    public static final String _WxNotifyUrl = "https://api2.grtstar.cn/rest/userrecharge/wxnotify";
+    public static final String _AppIdPub = "wxf07f90b263f5d3ba";
+    public static final String _AppSecretPub = "07f6b26e8c732e2a2ad1578f6e862afb";
+    public static final String _AppKeyPub = "7dbd5e40c150bfd758a20dfde60fea81";
+    public static final String _MerchantIdPub = "1375918302";
+    public static final String _WxNotifyUrl = "http://chechehulian.cn/rest/userrecharge/wxnotify";
     private static final String _WxAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential";
     private static final String _WxJSTicketUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket";
     public static final String _WxAuthAccessTokenUrl = "https://api.weixin.qq.com/sns/oauth2/access_token";

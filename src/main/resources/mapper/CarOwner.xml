@@ -164,6 +164,9 @@
     <if test="name != null">
       and name like CONCAT('%',#{name},'%')
     </if>
+    <if test="month != null and month != 0" >
+      and month(birthday) = #{month,jdbcType=INTEGER}
+    </if>
     order by 1 desc
   </select>
   <update id="updateStatus" parameterType="map">

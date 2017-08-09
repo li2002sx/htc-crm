@@ -49,6 +49,7 @@ function initTable() {
             var param = {
                 pageIndex: params.pageNumber,
                 pageSize: params.pageSize,
+                month: parseInt($('#month').val()) || 0,
                 name: $('#name').val()
             };
             return param;
@@ -74,6 +75,9 @@ function initTable() {
         }, {
             field: 'cardNo',
             title: '身份证号'
+        }, {
+            field: 'birthday',
+            title: '生日'
         }, {
             field: 'buyTime',
             title: '购买时间'

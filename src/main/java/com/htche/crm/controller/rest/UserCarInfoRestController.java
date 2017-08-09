@@ -145,13 +145,17 @@ public class UserCarInfoRestController {
         apiResult.setStatus(0);
         User user = CurrentUser.getInstance().getUser();
         if (user != null) {
-            userCarInfo.setUserId(user.getUserId());
-            userCarInfo.setStatus(CommonStatus.Normal.getIndex());
-            if (userCarInfo.getUserCarInfoId() == 0) {
-                userCarInfo.setCreateTime(new Date());
+            if (user.isVip()) {
+                userCarInfo.setUserId(user.getUserId());
+                userCarInfo.setStatus(CommonStatus.Normal.getIndex());
+                if (userCarInfo.getUserCarInfoId() == 0) {
+                    userCarInfo.setCreateTime(new Date());
+                }
+                boolean flag = userCarInfoBiz.save(userCarInfo);
+                apiResult.setStatus(flag ? 1 : 0);
+            } else {
+                apiResult.setMessage("您没有开通VIP账户或者账户已到期");
             }
-            boolean flag = userCarInfoBiz.save(userCarInfo);
-            apiResult.setStatus(flag ? 1 : 0);
         } else {
             apiResult.setStatus(-1);
         }

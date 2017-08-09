@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 
 /**
  * Created by jankie on 16/5/1.
@@ -94,6 +95,7 @@ public class IndexController {
         }
         model.addObject("totalSmsCount", totalSmsCount);
         model.addObject("useSmsCount", useSmsCount);
+        model.addObject("month", LocalDate.now().getMonthValue());
 
         return model;
     }

@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.htche.crm.domain.CarOwner;
 import com.htche.crm.mapper.CarOwnerMapper;
+import com.htche.crm.model.query.CarOwnerQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -40,16 +41,14 @@ public class CarOwnerBiz {
     /**
      * 列表
      *
-     * @param name
-     * @param pageIndex
-     * @param pageSize
      * @return
      */
-    public Page<CarOwner> selectAllList(int carDealerId, String name, int pageIndex, int pageSize) {
-        Page<CarOwner> carOwnerPage = PageHelper.startPage(pageIndex, pageSize);
+    public Page<CarOwner> selectAllList(int carDealerId, CarOwnerQuery query) {
+        Page<CarOwner> carOwnerPage = PageHelper.startPage(query.getPageIndex(), query.getPageSize());
         Map<String, Object> map = new HashMap<>();
         map.put("carDealerId", carDealerId);
-        map.put("name", name);
+        map.put("name", query.getName());
+        map.put("month", query.getMonth());
         List<CarOwner> carOwners = carOwnerMapper.selectAllList(map);
         return carOwnerPage;
     }

@@ -10,4 +10,6 @@ import lombok.Data;
 public class CarOwnerQuery extends PageQuery {
 
     public String name;
+
+    public Integer month;
 }

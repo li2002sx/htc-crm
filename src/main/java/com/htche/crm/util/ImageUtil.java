@@ -17,7 +17,7 @@ import java.util.Date;
 public class ImageUtil {
 
     public static String getRealPicUrl(String picUrl, boolean def) {
-        if (picUrl.startsWith("http://")) {
+        if (StringUtils.isNotEmpty(picUrl) && picUrl.startsWith("http://")) {
             return picUrl;
         } else {
             String realPicUrl = def ? "/images/user2-160x160.jpg" : "";
